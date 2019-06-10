@@ -1,0 +1,10 @@
+{% for post in site.posts  %}
+        {% if include.tag == post.category %}
+          <div id="posts">
+              <a href="{{site.baseurl}}{{post.url}}" style="color:black">
+                <h1>{{post.title}}</h1>
+                <p>{{post.meta}}</p>
+              </a>
+            </div>
+      {%endif%}
+{%endfor%}

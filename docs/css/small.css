@@ -1,0 +1,54 @@
+@media screen and (max-width: 750px){
+
+    #side-content{
+      display: none;
+      margin-left: 10%;
+    }
+
+  .about-me{
+    box-sizing: border-box;
+    border: solid;
+    width: 100%;
+    margin-bottom: 5%;
+    padding-left: 2%;
+    background-color: gray;
+  }
+
+  .small-screen{
+    width: auto;
+    border: solid;
+  }
+  .small-screen h1{
+    display: inline-block;
+    border: solid;
+    margin: 0;
+  }
+
+  #drop-down{
+    display:inline;
+  }
+
+  #content{
+    box-sizing: border-box;
+    border: solid;
+    border-color: black;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    overflow: auto;
+    background-color: lightblue;
+  }
+  #posts{
+    margin-top: 4%;
+  }
+  .pages-info{
+    margin: auto;
+  }
+  #pages,.search,.pages-info, .recent, .archives,.resources,.share,.tags{
+    border:solid;
+    width: 80%;
+    text-align: center;
+    margin-top: 5%;
+    border-radius: 50px;
+  }
+}

@@ -1,0 +1,15 @@
+---
+layout: default
+---
+
+<div class="conten-1">
+  <h1>{{page.title}}</h1>
+  {{content}}
+</div>
+{%include write_comment.html category=page.title %}
+{%assign path = page.title | replace: ' ', '_'%}
+{%for com in site.data.comments[path]%}
+  {%assign name=com[1].name %}
+  {%assign comment=com[1].comment%}
+  {%include comments.html name=name comment=comment%}
+{%endfor%}

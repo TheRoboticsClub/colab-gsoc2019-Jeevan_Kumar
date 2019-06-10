@@ -1,0 +1,6 @@
+baseurl: /learn-jekyll
+exclude : ['README.md']
+permalink: pretty
+plugins:
+  - jekyll-paginate
+paginate: 5

@@ -1,0 +1,19 @@
+---
+layout: default
+---
+{% for post in site.posts  %}
+<div id="posts" name='posts'>
+    <a href="{{site.baseurl}}{{post.url}}" style="color:black">
+      <h1>{{post.title}}</h1>
+      <p>{{post.meta}}</p>
+    </a>
+    <div class="tags" id='tags' name='tags' style="display:none;">
+      {%for tag in post.tags%}
+          <span>{{tag.name}}</span>:<span>{{tag.score}}</span>,
+      {%endfor%}
+  </div>
+</div>
+{%endfor%}
+
+
+<script src="{{site.baseurl}}/script/search.js"></script>
