@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2019-06-08T18:21:14
+# Project created by QtCreator 2019-06-12T16:49:45
 #
 #-------------------------------------------------
 
@@ -8,13 +8,13 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = AppConfig
+TARGET = appconfig
 TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        appConfig.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += appConfig.h
 
-FORMS    += mainwindow.ui
+FORMS    += Appconfig.ui
