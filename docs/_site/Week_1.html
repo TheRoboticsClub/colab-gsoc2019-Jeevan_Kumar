@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>Playback options for DetectionSuite</title>
+
+  <link rel="stylesheet" href="/hacker-blog/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Playback options for DetectionSuite | Hacker-Blog</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Playback options for DetectionSuite" />
+<meta name="author" content="sleep-404" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Week 1: Adding Playback functionalities to DetectionSuite" />
+<meta property="og:description" content="Week 1: Adding Playback functionalities to DetectionSuite" />
+<link rel="canonical" href="http://localhost:4000/hacker-blog/Week_1" />
+<meta property="og:url" content="http://localhost:4000/hacker-blog/Week_1" />
+<meta property="og:site_name" content="Hacker-Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-06-02T00:00:00+05:30" />
+<script type="application/ld+json">
+{"description":"Week 1: Adding Playback functionalities to DetectionSuite","author":{"@type":"Person","name":"sleep-404"},"@type":"BlogPosting","url":"http://localhost:4000/hacker-blog/Week_1","headline":"Playback options for DetectionSuite","dateModified":"2019-06-02T00:00:00+05:30","datePublished":"2019-06-02T00:00:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/hacker-blog/Week_1"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/hacker-blog/">
+    
+    <h1>sleep_404@home:~$</h1>
+    </a>
+    <div class="header-links">
+      <a href="/hacker-blog/archive"><h2 class="header-link">Archive</h2></a>
+<a href="/hacker-blog/about"><h2 class="header-link">About</h2></a>
+<a href="/hacker-blog/atom.xml"><h2 class="header-link">RSS</h2></a>
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2>Playback options for DetectionSuite</h2>
+  <time datetime="2019-06-02T00:00:00+05:30" class="by-line">02 Jun 2019</time>
+  <h1 id="week-1-adding-playback-functionalities-to-detectionsuite">Week 1: Adding Playback functionalities to DetectionSuite</h1>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Task 1: Done implementing <strong><em>pause</em></strong> functionality</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Task 2: Done adding trackbar</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Task 3: Done adding playback rates</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Task 4: Finished week1’s proposed tasks</li>
+</ul>
+
+<h1 id="new-features">New Features!</h1>
+<ul>
+  <li>You have deployed your precious weights on a video and are
+  waiting for it to detect something inportant to you (may be
+some special “class”), and it gets detected, Now if you are
+very happy and want to freeze that moment for eternity, you
+could do that using the new <strong><em>pause</em></strong> functionality.</li>
+  <li>If you are deploying it on a really boring video but you
+  cannot risk missing  any of it, A good news, you could now
+  increase your playback speed so that you could watch the
+  inferenced video at 1.5x/2x or even higher rates !</li>
+  <li>
+    <p>Now suppose that you are drinking hot coffee and spilled it
+  bymistake , in the process you missed the crucial part of
+  your video which you are inferencing , No worries you can
+  noww slide backward and watch it again!!</p>
+
+    <p>As described in the proposal ,the first week of my GSOC
+ was dedicated to adding new playback functionalities
+ mentioned above like pause , playback rates , and trackbar
+ to the DetectionSuite. They have been implemented in the
+ form of class definitions in playback.hpp it’s
+ implementations in playback.cpp.</p>
+  </li>
+</ul>
+
+<h1 id="work-distribution">Work Distribution</h1>
+<p>Starting 1-2 days were spent searching different available
+methods on how to implement these features i.e. whether to
+integrate the deployer withint the suite by making space for it
+or to leave it as is and add the feature to the OpenCV window
+or create a new Qt window that would show this. Due to too much
+enthusiasm in the early stage I thought of going with the last
+option of create a new Qt window and display it there.Then I
+spent a day on learning Qt. But only while going through the
+tutorials I understood that this is not something which is done
+overnight and I should stick to something which I can pull of
+in time and also so that I can go through more Qt tutorials
+while working as most of my Week 2 is based on it. Then it took
+a day and half on creating and experimenting the playback
+header files on a simple video to check how it is funcitoning.
+Everything was working fine until the Integration Day (when i
+was required to integrate my header file with suite) came. I
+could not even compile my code as I was adding only the header
+file of the new functionalities in the CMakeList.txt. I got so
+frustrated due to continous compile fails that I was
+overlooking that part evertime I was checking the cmake file.
+Thanks to Sergio I cooled down a bit and after spending more
+than three hours on that I realized where I went wrong. After
+that again experimentation started as to where I should include
+my header file and call functions. And luckily I was able to
+pull this off before my meeting with mentors.<br />
+/hacker-blog</p>
+<h1 id="results">Results</h1>
+<p><img src="/hacker-blog/img/week_1.png" width="100%" alt="drawing" />
+The video for the same can be found here.</p>
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/dX895_HzVHA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+<h1 id="upcoming-work">Upcoming work</h1>
+<p>After discussing with mentors , few changes were proposed by
+them, like to stop inferencing when paused, add playback
+functionalities to the ground truth aswell and sync them both
+and the already planned week 2.</p>
+
+<h1 id="comments-are-currently-not-working">Comments are currently not working</h1>
+
+</article>
+      </section>
+    </div>
+  </div>
+
+   <footer>
+  <a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+    <span>
+        <b>sleep_404</b>
+    </span>
+    
+    <span>© 2019</span>
+  </a>
+</footer>
+
+  
+</body>
+
+</html>

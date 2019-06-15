@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>Forgot creating an AppConfig file, not a problem !!</title>
+
+  <link rel="stylesheet" href="/hacker-blog/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Forgot creating an AppConfig file, not a problem !! | Hacker-Blog</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Forgot creating an AppConfig file, not a problem !!" />
+<meta name="author" content="sleep-404" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="FINISHED Task 1: Changed the interface to accept either of the AppConfig file or the individually selected weights Task 2: Integrated it with suite" />
+<meta property="og:description" content="FINISHED Task 1: Changed the interface to accept either of the AppConfig file or the individually selected weights Task 2: Integrated it with suite" />
+<link rel="canonical" href="http://localhost:4000/hacker-blog/Week_3_pre" />
+<meta property="og:url" content="http://localhost:4000/hacker-blog/Week_3_pre" />
+<meta property="og:site_name" content="Hacker-Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-06-13T00:00:00+05:30" />
+<script type="application/ld+json">
+{"description":"FINISHED Task 1: Changed the interface to accept either of the AppConfig file or the individually selected weights Task 2: Integrated it with suite","author":{"@type":"Person","name":"sleep-404"},"@type":"BlogPosting","url":"http://localhost:4000/hacker-blog/Week_3_pre","headline":"Forgot creating an AppConfig file, not a problem !!","dateModified":"2019-06-13T00:00:00+05:30","datePublished":"2019-06-13T00:00:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/hacker-blog/Week_3_pre"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/hacker-blog/">
+    
+    <h1>sleep_404@home:~$</h1>
+    </a>
+    <div class="header-links">
+      <a href="/hacker-blog/archive"><h2 class="header-link">Archive</h2></a>
+<a href="/hacker-blog/about"><h2 class="header-link">About</h2></a>
+<a href="/hacker-blog/atom.xml"><h2 class="header-link">RSS</h2></a>
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2>Forgot creating an AppConfig file, not a problem !!</h2>
+  <time datetime="2019-06-13T00:00:00+05:30" class="by-line">13 Jun 2019</time>
+  <p><strong>FINISHED</strong></p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Task 1: Changed the interface to accept either of the AppConfig file or the individually selected weights</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Task 2: Integrated it with suite</li>
+</ul>
+
+<p><strong>TO-DO</strong></p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Task 1: Yet to convert the ListView to Dropdown.</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Task 2: Yet to add filterting option to deployer.</li>
+</ul>
+
+<p>Currently , in order to run the App , you must pass a config
+file that has the paths of different required parameters stored
+in them. So to make the End-user experience more
+friendly , effort has been made to create Graphical User
+Interface which pops up when the config file is not passed.</p>
+
+<p><strong>FINAL-LOOK</strong><br />
+The final interface of the GUI at the end of the day is as shown below
+<img src="/hacker-blog/img/week3_1.png" width="400" height="200" alt="drawing" /><br />
+As can be seen above, it has two parts:</p>
+<ul>
+  <li>You can select the required parameters individually on the go.</li>
+  <li>Or you could also pass a config file in case if you have one</li>
+</ul>
+
+<h1 id="first-case--selecting-the-required-parameters-graphically">First case : Selecting the required parameters graphically</h1>
+<p>While using the App for the first time , many users might forget
+to provide a config file as required by the app, sometimes
+people who are new to Linux might even find it difficult to
+create/pass the config file. So to make the app more user
+friendly and start it without going through the hastle of
+creating a config file , a GUI has been made using which the
+user can select them. Upon not selecting all the parameters it
+also displays a warning box as shown.<br />
+<img src="/hacker-blog/img/week3_3.png" width="400" height="200" alt="drawing" /><br />
+The video for the same can be found here.</p>
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/0A6RozhIfgY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+<h2 id="implementation">Implementation</h2>
+<p>While going through the codebase regarding how things are
+implemented , it was observerd that the provide <strong><em>.yml</em></strong> is
+converted to a yaml node. So code has been written to return
+a yaml node which has the same key:value structure as it were
+if a config file has been passed.</p>
+
+<h1 id="second-case--selecting-the-config-file-graphically">Second case : Selecting the config file graphically</h1>
+<p>If you already created a config file , and just forgot to pass
+it or it exists but not in the same directory and you are lazy
+enough to not pass the entire path, no worries you can just
+select the config file only instead of all the required
+parameters individually. And this, similar to the above part
+pop up an error message if no file is selected.<br />
+<img src="/hacker-blog/img/week3_2.png" width="400" height="200" alt="drawing" />  f
+The video for the same can be found here.</p>
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/F9NTfS6ussg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+<h2 id="implementation-1">Implementation</h2>
+<p>If a config file is passed , the file is then searched to obtain
+it’s entire filepath , which later is used in creating a
+yaml::node. So basically we need to provide the filepath to the
+function which creates the node.</p>
+
+<h1 id="upcomming-tasks">Upcomming tasks</h1>
+<p>Enable support to use the original darknet framework instead of
+a modified one which is currently being used. And upon
+completion implement the filtering and Dropdown options of this
+week(yet to decide).</p>
+
+<h2 id="as-usual-the-comments-below-are-not-working">As usual the comments below are not working</h2>
+
+</article>
+      </section>
+    </div>
+  </div>
+
+   <footer>
+  <a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+    <span>
+        <b>sleep_404</b>
+    </span>
+    
+    <span>© 2019</span>
+  </a>
+</footer>
+
+  
+</body>
+
+</html>

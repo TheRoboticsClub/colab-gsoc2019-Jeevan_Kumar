@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hacker-Blog</title>
+    <description>Blog for GSOC_2019</description>
+    <link>http://localhost:4000</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <author>
+      <name>sleep-404</name>
+      <email>justjeevan07@gmail.com</email>
+      <uri>https://theroboticsclub.github.io/colab-gsoc2019-Jeevan_Kumar/</uri>
+    </author>
+    
+      <item>
+        <title>Forgot creating an AppConfig file, not a problem !!</title>
+        <description>&lt;p&gt;&lt;strong&gt;FINISHED&lt;/strong&gt;&lt;/p&gt;
+&lt;ul class=&quot;task-list&quot;&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; checked=&quot;checked&quot; /&gt;Task 1: Changed the interface to accept either of the AppConfig file or the individually selected weights&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; checked=&quot;checked&quot; /&gt;Task 2: Integrated it with suite&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;TO-DO&lt;/strong&gt;&lt;/p&gt;
+&lt;ul class=&quot;task-list&quot;&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;Task 1: Yet to convert the ListView to Dropdown.&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;Task 2: Yet to add filterting option to deployer.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Currently , in order to run the App , you must pass a config
+file that has the paths of different required parameters stored
+in them. So to make the End-user experience more
+friendly , effort has been made to create Graphical User
+Interface which pops up when the config file is not passed.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;FINAL-LOOK&lt;/strong&gt;&lt;br /&gt;
+The final interface of the GUI at the end of the day is as shown below
+&lt;img src=&quot;/hacker-blog/img/week3_1.png&quot; width=&quot;400&quot; height=&quot;200&quot; alt=&quot;drawing&quot; /&gt;&lt;br /&gt;
+As can be seen above, it has two parts:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;You can select the required parameters individually on the go.&lt;/li&gt;
+  &lt;li&gt;Or you could also pass a config file in case if you have one&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;first-case--selecting-the-required-parameters-graphically&quot;&gt;First case : Selecting the required parameters graphically&lt;/h1&gt;
+&lt;p&gt;While using the App for the first time , many users might forget
+to provide a config file as required by the app, sometimes
+people who are new to Linux might even find it difficult to
+create/pass the config file. So to make the app more user
+friendly and start it without going through the hastle of
+creating a config file , a GUI has been made using which the
+user can select them. Upon not selecting all the parameters it
+also displays a warning box as shown.&lt;br /&gt;
+&lt;img src=&quot;/hacker-blog/img/week3_3.png&quot; width=&quot;400&quot; height=&quot;200&quot; alt=&quot;drawing&quot; /&gt;&lt;br /&gt;
+The video for the same can be found here.&lt;/p&gt;
+&lt;iframe width=&quot;100%&quot; height=&quot;500&quot; src=&quot;https://www.youtube.com/embed/0A6RozhIfgY&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;h2 id=&quot;implementation&quot;&gt;Implementation&lt;/h2&gt;
+&lt;p&gt;While going through the codebase regarding how things are
+implemented , it was observerd that the provide &lt;strong&gt;&lt;em&gt;.yml&lt;/em&gt;&lt;/strong&gt; is
+converted to a yaml node. So code has been written to return
+a yaml node which has the same key:value structure as it were
+if a config file has been passed.&lt;/p&gt;
+
+&lt;h1 id=&quot;second-case--selecting-the-config-file-graphically&quot;&gt;Second case : Selecting the config file graphically&lt;/h1&gt;
+&lt;p&gt;If you already created a config file , and just forgot to pass
+it or it exists but not in the same directory and you are lazy
+enough to not pass the entire path, no worries you can just
+select the config file only instead of all the required
+parameters individually. And this, similar to the above part
+pop up an error message if no file is selected.&lt;br /&gt;
+&lt;img src=&quot;/hacker-blog/img/week3_2.png&quot; width=&quot;400&quot; height=&quot;200&quot; alt=&quot;drawing&quot; /&gt;  f
+The video for the same can be found here.&lt;/p&gt;
+&lt;iframe width=&quot;100%&quot; height=&quot;500&quot; src=&quot;https://www.youtube.com/embed/F9NTfS6ussg&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;h2 id=&quot;implementation-1&quot;&gt;Implementation&lt;/h2&gt;
+&lt;p&gt;If a config file is passed , the file is then searched to obtain
+it’s entire filepath , which later is used in creating a
+yaml::node. So basically we need to provide the filepath to the
+function which creates the node.&lt;/p&gt;
+
+&lt;h1 id=&quot;upcomming-tasks&quot;&gt;Upcomming tasks&lt;/h1&gt;
+&lt;p&gt;Enable support to use the original darknet framework instead of
+a modified one which is currently being used. And upon
+completion implement the filtering and Dropdown options of this
+week(yet to decide).&lt;/p&gt;
+
+&lt;h2 id=&quot;as-usual-the-comments-below-are-not-working&quot;&gt;As usual the comments below are not working&lt;/h2&gt;
+</description>
+        <pubDate>Thu, 13 Jun 2019 00:00:00 +0530</pubDate>
+        <link>http://localhost:4000//Week_3_pre</link>
+        <link href="http://localhost:4000/Week_3_pre"/>
+        <guid isPermaLink="true">http://localhost:4000/Week_3_pre</guid>
+      </item>
+    
+      <item>
+        <title>The Unexpected Week</title>
+        <description>&lt;h1 id=&quot;week-2-transition-from-a-bad-start-to-regaining-confidence&quot;&gt;Week 2: Transition from a bad start to regaining confidence.&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;FINISHED&lt;/strong&gt;&lt;/p&gt;
+&lt;ul class=&quot;task-list&quot;&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; checked=&quot;checked&quot; /&gt;Task 1: Added playback functionality to groundtruth window and synchronised it with the inferenced one.&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; checked=&quot;checked&quot; /&gt;Task 2: Finished familiarizing and experimentation with Qt.&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; checked=&quot;checked&quot; /&gt;Task 3: Finished designing the GUI to graphically select the required parameters.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;TO-DO&lt;/strong&gt;&lt;/p&gt;
+&lt;ul class=&quot;task-list&quot;&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;Task 1: Integrate the above created GUI with the suite.&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;Task 2: Change the GUI from ListView to dropdown.&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;Task 3: Add filtering functionality to deployer.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;After adding playback functionalities to ground truth as well
+a PR was made on the very first day of week2.And this week’s
+work has been started. Most of week 2’s work was on improving
+the GUI of the suite, which was built using Qt. As I was not
+familiar with this framework,some time(Max 3 days) was alloted
+to learn and experiment with Qt in the proposal itself.
+Everything went smoothly untill now.&lt;br /&gt;
+After getting enough familiarity, now the bad move, I started to implement the
+dropdown feature in the Suite and it wasn’t going as expected.
+Because the parameters which where being passed to the function
+calls to deployer , SamplerGenerationHandler ,
+GenericLiveReader , GenericInferencer and other relevant header
+files were in the form of QListView. Changeing at one place
+required to edit the corresponding function calls with
+appropiate paramaters. This combined with sudden damage of my
+battery and visiting my grandmothers place had their toll on
+me. Although a lot of experimentations were made it was nothing
+but trash. And I got panicked as no useful code has been
+produced since the initial PR has been made that week.&lt;/p&gt;
+
+&lt;p&gt;Then on the same day I talked to Vinay and explained him my
+situation and we had a meeting that day. We then discussed a
+few things and set our priority order. This meeting not only
+consoled me but also helped in regaing my confidence back. And
+then I started my work on implementing a pop up that would ask
+us to provide the required parameters(datasetPath,netCfg etc)
+if not provided a config file while starting the app. And I was
+able to complete the GUI of the pop-up before week2 ‘s meeting
+with my mentors.&lt;/p&gt;
+
+&lt;h1 id=&quot;results&quot;&gt;Results&lt;/h1&gt;
+&lt;p&gt;Currently the app has the following interface, will be editing
+as a few other parameters are also required to run
+evaluator,detectors etc.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/hacker-blog/img/week_2.png&quot; width=&quot;400&quot; height=&quot;200&quot; alt=&quot;drawing&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Final note: Although slight delay was expected the damage of
+my laptop battery and my unplanned visit to my grand parents
+house delayed the work by 2 more days. But thanks to my mentors
+for their help, now I guess I can complete my as tasks
+mentioned in my proposal without any hindrances.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;comments-are-currently-not-working&quot;&gt;Comments are currently not working&lt;/h1&gt;
+</description>
+        <pubDate>Sun, 09 Jun 2019 00:00:00 +0530</pubDate>
+        <link>http://localhost:4000//Week_2</link>
+        <link href="http://localhost:4000/Week_2"/>
+        <guid isPermaLink="true">http://localhost:4000/Week_2</guid>
+      </item>
+    
+      <item>
+        <title>Playback options for DetectionSuite</title>
+        <description>&lt;h1 id=&quot;week-1-adding-playback-functionalities-to-detectionsuite&quot;&gt;Week 1: Adding Playback functionalities to DetectionSuite&lt;/h1&gt;
+
+&lt;ul class=&quot;task-list&quot;&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; checked=&quot;checked&quot; /&gt;Task 1: Done implementing &lt;strong&gt;&lt;em&gt;pause&lt;/em&gt;&lt;/strong&gt; functionality&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; checked=&quot;checked&quot; /&gt;Task 2: Done adding trackbar&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; checked=&quot;checked&quot; /&gt;Task 3: Done adding playback rates&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; checked=&quot;checked&quot; /&gt;Task 4: Finished week1’s proposed tasks&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;new-features&quot;&gt;New Features!&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;You have deployed your precious weights on a video and are
+  waiting for it to detect something inportant to you (may be
+some special “class”), and it gets detected, Now if you are
+very happy and want to freeze that moment for eternity, you
+could do that using the new &lt;strong&gt;&lt;em&gt;pause&lt;/em&gt;&lt;/strong&gt; functionality.&lt;/li&gt;
+  &lt;li&gt;If you are deploying it on a really boring video but you
+  cannot risk missing  any of it, A good news, you could now
+  increase your playback speed so that you could watch the
+  inferenced video at 1.5x/2x or even higher rates !&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Now suppose that you are drinking hot coffee and spilled it
+  bymistake , in the process you missed the crucial part of
+  your video which you are inferencing , No worries you can
+  noww slide backward and watch it again!!&lt;/p&gt;
+
+    &lt;p&gt;As described in the proposal ,the first week of my GSOC
+ was dedicated to adding new playback functionalities
+ mentioned above like pause , playback rates , and trackbar
+ to the DetectionSuite. They have been implemented in the
+ form of class definitions in playback.hpp it’s
+ implementations in playback.cpp.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;work-distribution&quot;&gt;Work Distribution&lt;/h1&gt;
+&lt;p&gt;Starting 1-2 days were spent searching different available
+methods on how to implement these features i.e. whether to
+integrate the deployer withint the suite by making space for it
+or to leave it as is and add the feature to the OpenCV window
+or create a new Qt window that would show this. Due to too much
+enthusiasm in the early stage I thought of going with the last
+option of create a new Qt window and display it there.Then I
+spent a day on learning Qt. But only while going through the
+tutorials I understood that this is not something which is done
+overnight and I should stick to something which I can pull of
+in time and also so that I can go through more Qt tutorials
+while working as most of my Week 2 is based on it. Then it took
+a day and half on creating and experimenting the playback
+header files on a simple video to check how it is funcitoning.
+Everything was working fine until the Integration Day (when i
+was required to integrate my header file with suite) came. I
+could not even compile my code as I was adding only the header
+file of the new functionalities in the CMakeList.txt. I got so
+frustrated due to continous compile fails that I was
+overlooking that part evertime I was checking the cmake file.
+Thanks to Sergio I cooled down a bit and after spending more
+than three hours on that I realized where I went wrong. After
+that again experimentation started as to where I should include
+my header file and call functions. And luckily I was able to
+pull this off before my meeting with mentors.&lt;br /&gt;
+/hacker-blog&lt;/p&gt;
+&lt;h1 id=&quot;results&quot;&gt;Results&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;/hacker-blog/img/week_1.png&quot; width=&quot;100%&quot; alt=&quot;drawing&quot; /&gt;
+The video for the same can be found here.&lt;/p&gt;
+&lt;iframe width=&quot;100%&quot; height=&quot;500&quot; src=&quot;https://www.youtube.com/embed/dX895_HzVHA&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;h1 id=&quot;upcoming-work&quot;&gt;Upcoming work&lt;/h1&gt;
+&lt;p&gt;After discussing with mentors , few changes were proposed by
+them, like to stop inferencing when paused, add playback
+functionalities to the ground truth aswell and sync them both
+and the already planned week 2.&lt;/p&gt;
+
+&lt;h1 id=&quot;comments-are-currently-not-working&quot;&gt;Comments are currently not working&lt;/h1&gt;
+</description>
+        <pubDate>Sun, 02 Jun 2019 00:00:00 +0530</pubDate>
+        <link>http://localhost:4000//Week_1</link>
+        <link href="http://localhost:4000/Week_1"/>
+        <guid isPermaLink="true">http://localhost:4000/Week_1</guid>
+      </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>The Unexpected Week</title>
+
+  <link rel="stylesheet" href="/hacker-blog/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>The Unexpected Week | Hacker-Blog</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="The Unexpected Week" />
+<meta name="author" content="sleep-404" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Week 2: Transition from a bad start to regaining confidence. FINISHED Task 1: Added playback functionality to groundtruth window and synchronised it with the inferenced one. Task 2: Finished familiarizing and experimentation with Qt. Task 3: Finished designing the GUI to graphically select the required parameters." />
+<meta property="og:description" content="Week 2: Transition from a bad start to regaining confidence. FINISHED Task 1: Added playback functionality to groundtruth window and synchronised it with the inferenced one. Task 2: Finished familiarizing and experimentation with Qt. Task 3: Finished designing the GUI to graphically select the required parameters." />
+<link rel="canonical" href="http://localhost:4000/hacker-blog/Week_2" />
+<meta property="og:url" content="http://localhost:4000/hacker-blog/Week_2" />
+<meta property="og:site_name" content="Hacker-Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-06-09T00:00:00+05:30" />
+<script type="application/ld+json">
+{"description":"Week 2: Transition from a bad start to regaining confidence. FINISHED Task 1: Added playback functionality to groundtruth window and synchronised it with the inferenced one. Task 2: Finished familiarizing and experimentation with Qt. Task 3: Finished designing the GUI to graphically select the required parameters.","author":{"@type":"Person","name":"sleep-404"},"@type":"BlogPosting","url":"http://localhost:4000/hacker-blog/Week_2","headline":"The Unexpected Week","dateModified":"2019-06-09T00:00:00+05:30","datePublished":"2019-06-09T00:00:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/hacker-blog/Week_2"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/hacker-blog/">
+    
+    <h1>sleep_404@home:~$</h1>
+    </a>
+    <div class="header-links">
+      <a href="/hacker-blog/archive"><h2 class="header-link">Archive</h2></a>
+<a href="/hacker-blog/about"><h2 class="header-link">About</h2></a>
+<a href="/hacker-blog/atom.xml"><h2 class="header-link">RSS</h2></a>
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2>The Unexpected Week</h2>
+  <time datetime="2019-06-09T00:00:00+05:30" class="by-line">09 Jun 2019</time>
+  <h1 id="week-2-transition-from-a-bad-start-to-regaining-confidence">Week 2: Transition from a bad start to regaining confidence.</h1>
+<p><strong>FINISHED</strong></p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Task 1: Added playback functionality to groundtruth window and synchronised it with the inferenced one.</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Task 2: Finished familiarizing and experimentation with Qt.</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Task 3: Finished designing the GUI to graphically select the required parameters.</li>
+</ul>
+
+<p><strong>TO-DO</strong></p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Task 1: Integrate the above created GUI with the suite.</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Task 2: Change the GUI from ListView to dropdown.</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Task 3: Add filtering functionality to deployer.</li>
+</ul>
+
+<p>After adding playback functionalities to ground truth as well
+a PR was made on the very first day of week2.And this week’s
+work has been started. Most of week 2’s work was on improving
+the GUI of the suite, which was built using Qt. As I was not
+familiar with this framework,some time(Max 3 days) was alloted
+to learn and experiment with Qt in the proposal itself.
+Everything went smoothly untill now.<br />
+After getting enough familiarity, now the bad move, I started to implement the
+dropdown feature in the Suite and it wasn’t going as expected.
+Because the parameters which where being passed to the function
+calls to deployer , SamplerGenerationHandler ,
+GenericLiveReader , GenericInferencer and other relevant header
+files were in the form of QListView. Changeing at one place
+required to edit the corresponding function calls with
+appropiate paramaters. This combined with sudden damage of my
+battery and visiting my grandmothers place had their toll on
+me. Although a lot of experimentations were made it was nothing
+but trash. And I got panicked as no useful code has been
+produced since the initial PR has been made that week.</p>
+
+<p>Then on the same day I talked to Vinay and explained him my
+situation and we had a meeting that day. We then discussed a
+few things and set our priority order. This meeting not only
+consoled me but also helped in regaing my confidence back. And
+then I started my work on implementing a pop up that would ask
+us to provide the required parameters(datasetPath,netCfg etc)
+if not provided a config file while starting the app. And I was
+able to complete the GUI of the pop-up before week2 ‘s meeting
+with my mentors.</p>
+
+<h1 id="results">Results</h1>
+<p>Currently the app has the following interface, will be editing
+as a few other parameters are also required to run
+evaluator,detectors etc.</p>
+
+<p><img src="/hacker-blog/img/week_2.png" width="400" height="200" alt="drawing" /></p>
+
+<p><strong>Final note: Although slight delay was expected the damage of
+my laptop battery and my unplanned visit to my grand parents
+house delayed the work by 2 more days. But thanks to my mentors
+for their help, now I guess I can complete my as tasks
+mentioned in my proposal without any hindrances.</strong></p>
+
+<h1 id="comments-are-currently-not-working">Comments are currently not working</h1>
+
+</article>
+      </section>
+    </div>
+  </div>
+
+   <footer>
+  <a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+    <span>
+        <b>sleep_404</b>
+    </span>
+    
+    <span>© 2019</span>
+  </a>
+</footer>
+
+  
+</body>
+
+</html>

@@ -1,165 +1,85 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>learning</title>
-    <link rel="stylesheet" href="/learn-jekyll/css/main.css">
-    <link rel="stylesheet" href="/learn-jekyll/css/big.css">
-    <link rel="stylesheet" href="/learn-jekyll/css/small.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  </head>
-  <body>
-    <div id="sidebar" class="sidebar" >
-          <div id="about-me" class="about-me" >
-                <div class="small-screen">
-                    <h1><a href="/learn-jekyll/" >Jeevan's Blog </a></h1>
-                    <div id="drop-down" onclick="change()">
-                        <h1 style="float:right;"><a href="#">Press</a></h1>
-                    </div>
-                </div>
-               <p>A fun lover and programming enthusiasist</p>
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
 
-          <div id="side-content" class="before" >
-            <div id="search" class="search">
-              <form action="/learn-jekyll/search/" id='search-form'>
-                <input id="search-box" type="text" name="query" placeholder="Search..">
-              </form>
-            </div>
+  <title>Hacker-Blog</title>
 
-              <div id="pages">
-                    <h1>Pages</h1>
-                      <div class="pages-info">
-                          <a href="/learn-jekyll/about"><p>About</p></a>
-                          <a href="/learn-jekyll/projects"><p>Projects</p></a>
-                          <a href="/learn-jekyll/contact"><p>Contact</p></a>
-                      </div>
-                  </div>
-                  <a href="#">
-                    <div class="recent">
-                      <h1> Recent comments</h1>
-                    </div>
-                  </a>
-                <a href="#">
-                  <div class="tags" id="tags">
-                     <h1>Tags </h1>
-                  </div>
-                </a>
-                <a href="/learn-jekyll/resources">
-                  <div class="resources" id="resources">
-                      <h1>Resources</h1>
-                  </div>
-                </a>
-                <a href="/learn-jekyll/shareauto">
-                  <div class="share" id="share">
-                     <h1>Share Auto</h1>
-                  </div>
-                </a>
-                <a href="#">
-                  <div class="archives">
-                     <h1>Archives</h1>
-                  </div>
-                </a>
-          </div>
-    </div>
-    <div id="content">
-      <h1>DUde learn fast !!!</h1>
-<p>Hope so</p>
+  <link rel="stylesheet" href="/hacker-blog/css/main.css">
+  
+  <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" /> <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Hacker-Blog | Blog for GSOC_2019</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Hacker-Blog" />
+<meta name="author" content="sleep-404" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Blog for GSOC_2019" />
+<meta property="og:description" content="Blog for GSOC_2019" />
+<link rel="canonical" href="http://localhost:4000/hacker-blog/" />
+<meta property="og:url" content="http://localhost:4000/hacker-blog/" />
+<meta property="og:site_name" content="Hacker-Blog" />
+<script type="application/ld+json">
+{"name":"Hacker-Blog","description":"Blog for GSOC_2019","author":{"@type":"Person","name":"sleep-404"},"@type":"WebSite","url":"http://localhost:4000/hacker-blog/","headline":"Hacker-Blog","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
 
+</head>
 
-    <div id="posts">
-        <div class="post-tp">
-            <a href="/learn-jekyll/gsoc/2019/06/13/Week_3_pre/">
-              <h1>Forgot creating an AppConfig file, not a problem !!</h1>
-              <p>This post summarises the work done in Week2 and pre mid Week3</p>
-            </a>
-        </div>
-        <div class="post-info" style="border-top:solid;color:black;">
-          <a style="float:left;" href="/learn-jekyll/tags/gsoc/"><span>gsoc</span></a>
-          <span style="float:right;">2019-06-13 00:00:00 +0530</span>
-        </div>
-    </div>
-
-    <div id="posts">
-        <div class="post-tp">
-            <a href="/learn-jekyll/gsoc/2019/06/09/Week_2/">
-              <h1>The Unexpected Week</h1>
-              <p>This post briefs the work done during the second week of GSOC</p>
-            </a>
-        </div>
-        <div class="post-info" style="border-top:solid;color:black;">
-          <a style="float:left;" href="/learn-jekyll/tags/gsoc/"><span>gsoc</span></a>
-          <span style="float:right;">2019-06-09 00:00:00 +0530</span>
-        </div>
-    </div>
-
-    <div id="posts">
-        <div class="post-tp">
-            <a href="/learn-jekyll/gsoc/2019/06/02/Week_1/">
-              <h1>Adding Playback functionalities to the suite !</h1>
-              <p>This post briefs the work done during the first week of GSOC</p>
-            </a>
-        </div>
-        <div class="post-info" style="border-top:solid;color:black;">
-          <a style="float:left;" href="/learn-jekyll/tags/gsoc/"><span>gsoc</span></a>
-          <span style="float:right;">2019-06-02 00:00:00 +0530</span>
-        </div>
-    </div>
-
-    <div id="posts">
-        <div class="post-tp">
-            <a href="/learn-jekyll/technology/2018/06/23/test/">
-              <h1>Test</h1>
-              <p>Test teste tstetstt tettst et</p>
-            </a>
-        </div>
-        <div class="post-info" style="border-top:solid;color:black;">
-          <a style="float:left;" href="/learn-jekyll/tags/Technology/"><span>Technology</span></a>
-          <span style="float:right;">2018-06-23 00:00:00 +0530</span>
-        </div>
-    </div>
-
-    <div id="posts">
-        <div class="post-tp">
-            <a href="/learn-jekyll/technology/2018/06/23/test/">
-              <h1>Test</h1>
-              <p>Test teste tstetstt tettst et</p>
-            </a>
-        </div>
-        <div class="post-info" style="border-top:solid;color:black;">
-          <a style="float:left;" href="/learn-jekyll/tags/Technology/"><span>Technology</span></a>
-          <span style="float:right;">2018-06-23 00:00:00 +0530</span>
-        </div>
-    </div>
-
-
-<div id="paginator">
+<body>
+  <div id="wrapper">
+    <header>
+  <div>
+    <a href="/hacker-blog/">
     
-      
-      
-
-  <a href="/learn-jekyll/">1</a>
-
-    
-      <a href="/learn-jekyll/page2">2</a>
-      <p style="display:inline" >...</p>
-
-    
-
-      
-      <a href=" /learn-jekyll/page8">8</a>
-      
-        <button class="next" style="display:inline;">
-            <a href="/learn-jekyll/page2">Next &raquo;</a>
-        </button>
-      
-
-
-</div>
-
+    <h1>sleep_404@home:~$</h1>
+    </a>
+    <div class="header-links">
+      <a href="/hacker-blog/archive"><h2 class="header-link">Archive</h2></a>
+<a href="/hacker-blog/about"><h2 class="header-link">About</h2></a>
+<a href="/hacker-blog/atom.xml"><h2 class="header-link">RSS</h2></a>
     </div>
+  </div>
+</header>
+    <div class="container">
+      <section id="main_content">
+        <ul>
+    
+      <li>
+          <h2><a href="/hacker-blog/Week_3_pre">Forgot creating an AppConfig file, not a problem !!</a></h2>
+          <time datetime="2019-06-13T00:00:00+05:30">13 Jun 2019</time>
+          <p>FINISHED Task 1: Changed the interface to accept either of the AppConfig file or the individually selected weights Task 2: Integrated it with suite TO-DO Task 1: Yet to convert the ListView to Dropdown. Task 2: Yet to add filterting option to deployer. Currently , in order to run the...</p>
+      </li>
+    
+      <li>
+          <h2><a href="/hacker-blog/Week_2">The Unexpected Week</a></h2>
+          <time datetime="2019-06-09T00:00:00+05:30">09 Jun 2019</time>
+          <p>Week 2: Transition from a bad start to regaining confidence. FINISHED Task 1: Added playback functionality to groundtruth window and synchronised it with the inferenced one. Task 2: Finished familiarizing and experimentation with Qt. Task 3: Finished designing the GUI to graphically select the required parameters. TO-DO Task 1: Integrate...</p>
+      </li>
+    
+      <li>
+          <h2><a href="/hacker-blog/Week_1">Playback options for DetectionSuite</a></h2>
+          <time datetime="2019-06-02T00:00:00+05:30">02 Jun 2019</time>
+          <p>Week 1: Adding Playback functionalities to DetectionSuite Task 1: Done implementing pause functionality Task 2: Done adding trackbar Task 3: Done adding playback rates Task 4: Finished week1’s proposed tasks New Features! You have deployed your precious weights on a video and are waiting for it to detect something inportant...</p>
+      </li>
+    
+</ul>
 
+      </section>
+    </div>
+  </div>
 
-    <script src="/learn-jekyll/script/main.js"></script>
-  </body>
+   <footer>
+  <a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+    <span>
+        <b>sleep_404</b>
+    </span>
+    
+    <span>© 2019</span>
+  </a>
+</footer>
+
+  
+</body>
+
 </html>

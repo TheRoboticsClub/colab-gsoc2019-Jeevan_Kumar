@@ -1,6 +1,32 @@
-baseurl: /learn-jekyll
-exclude : ['README.md']
-permalink: pretty
+title: Hacker-Blog
+description: "Blog for GSOC_2019"
+author:
+  name: "sleep-404"
+  email: "justjeevan07@gmail.com"
+  url: "https://theroboticsclub.github.io/colab-gsoc2019-Jeevan_Kumar/"
+
+baseurl: /hacker-blog
+
+source: .
+destination: ./_site
+permalink: /:title
+paginate: 3
+paginate_path: /page/:num/
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+future: true
 plugins:
+  - jekyll-seo-tag
   - jekyll-paginate
-paginate: 5
+  - jekyll-sitemap
+
+# Custom variables
+owner : "sleep_404"
+year : "2019"
