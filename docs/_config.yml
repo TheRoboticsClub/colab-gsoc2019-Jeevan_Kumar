@@ -5,7 +5,7 @@ author:
   email: "justjeevan07@gmail.com"
   url: "https://theroboticsclub.github.io/colab-gsoc2019-Jeevan_Kumar/"
 
-baseurl: /hacker-blog
+baseurl: "/colab-gsoc2019-Jeevan_Kumar"
 
 source: .
 destination: ./_site
