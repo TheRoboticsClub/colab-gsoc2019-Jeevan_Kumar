@@ -18,10 +18,6 @@ namespace
 } // namespace
 
 
-SampleGenerationApp::SampleGenerationApp(){
-
-}
-
 SampleGenerationApp::SampleGenerationApp(int argc, char **argv):argc(argc),argv(argv) {
   // QApplication a(argc,argv);
   // this->a = new QApplication(argc,argv);
@@ -120,11 +116,14 @@ bool SampleGenerationApp::verifyRequirements() {
             this->config.SetProperty(*it,*(this->path));
             success=false;
             continue;
+            // SampleGenerationApp::verifyRequirements();
             // std::cout << win.GetPath()  << std::endl;
         }
 
     }
-    success = true;
+
+    if(!success)
+      success=SampleGenerationApp::verifyRequirements();
     return success;
 }
 

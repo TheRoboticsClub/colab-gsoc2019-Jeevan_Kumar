@@ -6,7 +6,7 @@
 
 class MyApp:public SampleGenerationApp{
 public:
-    MyApp():SampleGenerationApp(){
+    void RequiredParameters(){
       this->requiredArguments.push_back("datasetPath");
       this->requiredArguments.push_back("evaluationsPath");
       this->requiredArguments.push_back("weightsPath");
@@ -14,13 +14,13 @@ public:
       this->requiredArguments.push_back("namesPath");
     }
     MyApp(int argc, char* argv[]):SampleGenerationApp(argc,argv){
-      MyApp();
+      RequiredParameters();
     };
     MyApp(YAML::Node node):SampleGenerationApp(node){
-        MyApp();
+        RequiredParameters();
     };
     MyApp(std::string filepath, bool isPath):SampleGenerationApp(filepath,isPath){
-      MyApp();
+      RequiredParameters();
     };
     void operator()(){
         QApplication a(argc, argv);

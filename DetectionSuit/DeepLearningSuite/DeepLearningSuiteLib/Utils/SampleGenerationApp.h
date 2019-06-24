@@ -7,11 +7,9 @@
 
 #include <config/config.h>
 #include "pop_up.h"
-#include <QtWidgets>
 
 class SampleGenerationApp {
 public:
-    SampleGenerationApp();
     SampleGenerationApp(int argc, char* argv[]);
     SampleGenerationApp(YAML::Node node);
     SampleGenerationApp(std::string filepath,bool isPath);
