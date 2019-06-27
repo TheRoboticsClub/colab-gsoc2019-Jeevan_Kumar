@@ -149,23 +149,23 @@ void TensorFlowInferencer::output_result(int num_detections, int width, int heig
         }
 
 		int i;
-		// int boxes = 0, scores = 0, classes = 0, masks = 0;
+		int boxes = 0, scores = 0, classes = 0, masks = 0;
 
 		for( i=0; i<num_detections; i++ ) {
 
 
 
 			detections.push_back(detection());
-			detections[i].classId = classIds_data[i+1] - 1;  // In TensorFlow id's start from 1 whereas detectionsuite starts from 0s
-			detections[i].probability = detection_scores_data[i+1];
+			detections[i].classId = classIds_data[classes++] - 1;  // In TensorFlow id's start from 1 whereas detectionsuite starts from 0s
+			detections[i].probability = detection_scores_data[scores++];
 
-			detections[i].boundingBox.y = bounding_box_data[i+1] * height;
+			detections[i].boundingBox.y = bounding_box_data[boxes++] * height;
 
-			detections[i].boundingBox.x = bounding_box_data[i+1] * width;
+			detections[i].boundingBox.x = bounding_box_data[boxes++] * width;
 
-			detections[i].boundingBox.height = bounding_box_data[i+1] * height - detections[i].boundingBox.y;
+			detections[i].boundingBox.height = bounding_box_data[boxes++] * height - detections[i].boundingBox.y;
 
-			detections[i].boundingBox.width = bounding_box_data[i+1] * width - detections[i].boundingBox.x;
+			detections[i].boundingBox.width = bounding_box_data[boxes++] * width - detections[i].boundingBox.x;
 
             if (this->hasMasks) {
 
