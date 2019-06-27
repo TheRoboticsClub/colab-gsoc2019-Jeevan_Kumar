@@ -6,22 +6,27 @@
 
 class MyApp:public SampleGenerationApp{
 public:
-    void RequiredParameters(){
+  MyApp(int argc, char* argv[]):SampleGenerationApp(argc,argv){
       this->requiredArguments.push_back("datasetPath");
       this->requiredArguments.push_back("evaluationsPath");
       this->requiredArguments.push_back("weightsPath");
       this->requiredArguments.push_back("netCfgPath");
       this->requiredArguments.push_back("namesPath");
-    }
-    MyApp(int argc, char* argv[]):SampleGenerationApp(argc,argv){
-      RequiredParameters();
-    };
-    MyApp(YAML::Node node):SampleGenerationApp(node){
-        RequiredParameters();
-    };
-    MyApp(std::string filepath, bool isPath):SampleGenerationApp(filepath,isPath){
-      RequiredParameters();
-    };
+  };
+  MyApp(YAML::Node node):SampleGenerationApp(node){
+      this->requiredArguments.push_back("datasetPath");
+      this->requiredArguments.push_back("evaluationsPath");
+      this->requiredArguments.push_back("weightsPath");
+      this->requiredArguments.push_back("netCfgPath");
+      this->requiredArguments.push_back("namesPath");
+  };
+  MyApp(std::string filepath, bool isPath):SampleGenerationApp(filepath,isPath){
+      this->requiredArguments.push_back("datasetPath");
+      this->requiredArguments.push_back("evaluationsPath");
+      this->requiredArguments.push_back("weightsPath");
+      this->requiredArguments.push_back("netCfgPath");
+      this->requiredArguments.push_back("namesPath");
+  };
     void operator()(){
         QApplication a(argc, argv);
         MainWindow w(this);

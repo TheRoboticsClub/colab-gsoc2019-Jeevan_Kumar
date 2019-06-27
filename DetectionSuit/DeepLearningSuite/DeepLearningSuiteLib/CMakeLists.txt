@@ -8,7 +8,7 @@ IF (DARKNET_ACTIVE)
     # include_directories(${DARKNET_INCLUDE_DIR})
 ENDIF()
 
-add_subdirectory(Wrappers)
+# add_subdirectory(Wrappers)
 add_subdirectory(Common)
 add_subdirectory(DatasetConverters)
 add_subdirectory(Detectors)
@@ -19,8 +19,8 @@ add_subdirectory(Utils)
 
 # IF (DARKNET_ACTIVE)
   add_library(DeepLearningSuite SHARED
-                $<TARGET_OBJECTS:DeepLearningSuite_darknetLib>
-                $<TARGET_OBJECTS:DeepLearningSuite_darknetAPILib>
+                # $<TARGET_OBJECTS:DeepLearningSuite_darknetLib>
+                # $<TARGET_OBJECTS:DeepLearningSuite_darknetAPILib>
                 $<TARGET_OBJECTS:DeepLearningSuite_Common>
                 $<TARGET_OBJECTS:DeepLearningSuite_DatasetConverters>
                 $<TARGET_OBJECTS:DeepLearningSuite_Detectors>
