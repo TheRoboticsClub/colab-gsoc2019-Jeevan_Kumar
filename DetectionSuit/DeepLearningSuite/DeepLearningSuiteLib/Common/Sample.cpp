@@ -14,16 +14,19 @@ Sample::Sample() {
     this->rectRegions=RectRegionsPtr(new RectRegions());
     this->contourRegions=ContourRegionsPtr(new ContourRegions());
     this->rleRegions=RleRegionsPtr(new RleRegions());
-
+    // this->selected = new std::vector<int>
+    cv::setMouseCallback("Detection", Sample::CallBackFunc ,this);
 }
 
 Sample::Sample(const cv::Mat &colorImage) {
     colorImage.copyTo(this->colorImage);
+    cv::setMouseCallback("Detection", Sample::CallBackFunc ,&this->rectRegions);
 }
 
 Sample::Sample(const cv::Mat &colorImage, const RectRegionsPtr &rectRegions) {
     this->setColorImage(colorImage);
     this->setRectRegions(rectRegions);
+    cv::setMouseCallback("Detection", Sample::CallBackFunc ,&this->rectRegions);
 }
 
 Sample::Sample(const cv::Mat &colorImage, const ContourRegionsPtr &contourRegions) {
@@ -383,4 +386,25 @@ cv::Mat Sample::getSampledDepthColorMapImage(double alpha, double beta) const {
     if (this->contourRegions)
         this->contourRegions->drawRegions(image);
     return image;
+}
+
+
+void Sample::CallBackFunc(int event, int x, int y, int flags, void* userdata){
+     if(event == cv::EVENT_LBUTTONUP){
+       // check(userdata);
+         std::vector<RectRegion> regionsToPrint = ((Sample *)userdata)->rectRegions->getRegions();
+         for (auto it = regionsToPrint.begin(); it != regionsToPrint.end(); it++) {
+             LOG(INFO) << "Class: " << it->classID << '\n';
+             LOG(INFO) << "Confidence: " << it->confidence_score << '\n';
+             // LOG(INFO) << "uniqObjectID" << it->uniqObjectID <<'\n';
+             LOG(INFO) << "BBOX" << it->region.x++ << " " << it->region.y++ << " " << it->region.width << " "  << it->region.height << '\n';
+             LOG(INFO) << " It has been executed\n";
+         }
+         // const RectRegionsPtr& regions = regionsToPrint;
+       // setRectRegions(regionss);
+       
+     }
+     if  ( event == cv::EVENT_LBUTTONUP ){
+     LOG(INFO) << " This sis  : " << (((Sample *)(userdata))->rectRegions->getRegions()).size() << std::endl;
+     }
 }

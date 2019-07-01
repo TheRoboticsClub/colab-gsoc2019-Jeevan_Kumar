@@ -51,12 +51,13 @@ struct Sample {
     void save(const std::string& outPath);
     void print();
     bool show(const std::string readerImplementation, const std::string windowName, const int waitKey, const bool showDepth);
+    static void CallBackFunc(int event, int x, int y, int flags, void* userdat);
 
     bool isDepthImageValid();
     bool isValid();
     void filterSamplesByID(std::vector<std::string> filteredIDS);
     std::string getSampleID();
-
+    // void GetPoints(void *userdata);
 
 
 private:
@@ -70,6 +71,7 @@ private:
     std::string sampleID;
     int width = -1;
     int height = -1;
+    // std::vector<int> *selected;
 };
 
 
