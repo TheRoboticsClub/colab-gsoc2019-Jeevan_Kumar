@@ -19,6 +19,8 @@ public:
   void show();
   void completeShow();
   void updateFrame(int frameId);
+  void updateFrame(int FrameId, cv::Mat *image);
+  int currentFrame();
   static void onSlide(int currentPos,void *frame);
 private:
   bool pause;
@@ -26,8 +28,6 @@ private:
   char keystroke;
   std::vector<cv::Mat> inferences;
   std::vector<cv::Mat> groundTruth;
-  std::queue <cv::Mat> livefeed;
-  std::queue <cv::Mat> inf_livefeed;
   int frameId;
   long long int framesCount;
 };

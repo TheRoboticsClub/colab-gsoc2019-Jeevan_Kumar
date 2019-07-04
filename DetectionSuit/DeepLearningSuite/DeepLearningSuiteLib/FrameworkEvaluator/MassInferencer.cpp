@@ -8,10 +8,14 @@
 #include "MassInferencer.h"
 
 MassInferencer::MassInferencer(DatasetReaderPtr reader, FrameworkInferencerPtr inferencer, const std::string& resultsPath, bool debug)
- : MassInferencer::MassInferencer(reader, inferencer, resultsPath, NULL, debug) {}  // Delegating Constructor
+ : MassInferencer::MassInferencer(reader, inferencer, resultsPath, NULL, debug) {
+        this->detections = new std::vector<Sample>();
+ }  // Delegating Constructor
 
 MassInferencer::MassInferencer(DatasetReaderPtr reader, FrameworkInferencerPtr inferencer, bool debug)
- : MassInferencer::MassInferencer(reader, inferencer, NULL, debug) {}  // Delegating Constructor
+ : MassInferencer::MassInferencer(reader, inferencer, NULL, debug) {
+       this->detections = new std::vector<Sample>();
+ }  // Delegating Constructor
 
 MassInferencer::MassInferencer(DatasetReaderPtr reader, FrameworkInferencerPtr inferencer,
                                const std::string &resultsPath,double* confidence_threshold, bool debug): reader(reader), inferencer(inferencer), resultsPath(resultsPath),confidence_threshold(confidence_threshold),debug(debug)
@@ -21,6 +25,7 @@ MassInferencer::MassInferencer(DatasetReaderPtr reader, FrameworkInferencerPtr i
     else
         saveOutput = true;
     alreadyProcessed=0;
+    this->detections = new std::vector<Sample>();
     int time=0;
     time = reader->IsVideo() ? reader->TotalFrames() : 1 ;
     this->playback.AddTrackbar(time);
@@ -54,6 +59,8 @@ MassInferencer::MassInferencer(DatasetReaderPtr reader, FrameworkInferencerPtr i
         saveOutput = false;
     else
         saveOutput = true;
+
+    this->detections = new std::vector<Sample>();
     int time=0;
     time = reader->IsVideo() ? reader->TotalFrames() : 1 ;
     this->playback.AddTrackbar(time);
@@ -80,15 +87,27 @@ MassInferencer::MassInferencer(DatasetReaderPtr reader, FrameworkInferencerPtr i
         //Constructor to avoid writing results to outputPath
         saveOutput = false;
         alreadyProcessed=0;
+        this->detections = new std::vector<Sample>();
         int time=0;
         time = reader->IsVideo() ? reader->TotalFrames() : 1 ;
         this->playback.AddTrackbar(time);
 }
 
 void MassInferencer::BorderChange(int event, int x, int y, int flags, void* userdata){
+    if(event == cv::EVENT_LBUTTONDOWN){
+      int currFrame = ((MassInferencer *)(userdata))->playback.currentFrame();
+      LOG(INFO) << currFrame << std::endl;
+      (((MassInferencer *)(userdata))->detections)->at(currFrame-1).AdjustBox(x,y);
+      cv::Mat imager = (((MassInferencer *)(userdata))->detections)->at(currFrame-1).getSampledColorImage();
+      ((MassInferencer *)(userdata))->playback.updateFrame(currFrame-1,&imager);
+      // // ((Sample *)(userdata))->AdjustBox(x,y);
+      // // ((Sample *)(userdata))->SetMousy(true);
+      cv::imshow("Detection", imager);
+    }
      if(event == cv::EVENT_LBUTTONUP){
-       ((Sample *)(userdata))->AdjustBox(x,y);
-       ((Sample *)(userdata))->SetMousy(true);
+       // ((Sample *)(userdata))->AdjustBox(x,y);
+       // ((Sample *)(userdata))->SetMousy(true);
+       // cv::imshow("Detection", ((Sample *)(userdata))->getSampledColorImage());
      }
 }
 
@@ -168,14 +187,18 @@ void MassInferencer::process(bool useDepthImages, DatasetReaderPtr readerDetecti
     MassInferencer::IsProcessed(&sample,&counter,&nsamples);
     cv::Mat image2detect;
     static Sample detection;
-    cv::setMouseCallback("Detection", MassInferencer::BorderChange ,&detection);
+    cv::setMouseCallback("Detection", MassInferencer::BorderChange ,this);
     bool read_succesful = true;
     while (read_succesful){
-        read_succesful=this->reader->getNextSample(sample);
-        MassInferencer::finder(&sample,&detection,&image2detect,useDepthImages,&counter,&nsamples);
-        MassInferencer::Shower(&sample,&detection,&image2detect,useDepthImages);
+        if(!detection.GetMousy()){
+          read_succesful=this->reader->getNextSample(sample);
+          MassInferencer::finder(&sample,&detection,&image2detect,useDepthImages,&counter,&nsamples);
+          MassInferencer::Shower(&sample,&detection,&image2detect,useDepthImages);
+          this->detections->push_back(detection);
+      }
         detection.clearColorImage();
         detection.clearDepthImage();
+        detection.SetMousy(false);
         if (readerDetection != NULL)
             readerDetection->addSample(detection);
     }

@@ -33,7 +33,7 @@ private:
     double* confidence_threshold = NULL;
     double default_confidence_threshold = 0.2;
     Playback playback;
-    // Sample *detection;
+    std::vector<Sample> *detections;
     bool mousy;
 };
 

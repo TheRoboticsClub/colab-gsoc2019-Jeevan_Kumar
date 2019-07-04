@@ -94,3 +94,11 @@ void Playback::WaitTillResume(){
 void Playback::updateFrame(int frameId){
   this->frameId = frameId;
 }
+
+int Playback::currentFrame(){
+  return this->frameId;
+}
+
+void Playback::updateFrame(int FrameId ,cv::Mat *image){
+  this->inferences.at(FrameId) = *image;
+}
