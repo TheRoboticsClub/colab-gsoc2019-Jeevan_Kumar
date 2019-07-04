@@ -274,10 +274,44 @@ void Sample::print() {
     // LOG(INFO) << "Fuddu : " << this->rectRegions->regions.size() << std::endl;
 }
 
+// void calculator(int x,int y,int height,int width,int newX, int newY,int temp){
+//     switch (temp1) {
+//       case /* value */:
+//     }
+// }
+
+int mod(int test){
+    if(test<0)
+      return -test;
+    return test;
+}
+
 void Sample::AdjustBox(int x, int y){
       for (auto it = this->rectRegions->regions.begin(); it != this->rectRegions->regions.end(); it++) {
-          it->region.x=x;
-          it->region.y=y;
+          if(mod(it->region.x-x)<20 && mod(it->region.y-y)<20){
+            it->region.width  -= (x-it->region.x);
+            it->region.height -= (y-it->region.y);
+            it->region.x=x;
+            it->region.y=y;
+          }
+          else if(mod(it->region.x+it->region.width-x)<20 && mod(it->region.y-y)<20){
+            it->region.width  += (x-(it->region.x+it->region.width));
+            it->region.height -= (y-it->region.y);
+            // it->region.x=x;
+            it->region.y=y;
+          }
+          else if(mod(it->region.x-x)<20 && mod(it->region.y+it->region.height-y)<20){
+            it->region.width  -= (x-it->region.x);
+            it->region.height += (y-(it->region.y+it->region.height));
+            it->region.x=x;
+            // it->region.y=y;
+          }
+          else if(mod(it->region.x+it->region.width-x)<20 && mod(it->region.y+it->region.height-y)<20){
+            it->region.width  += (x-it->region.x-it->region.width);
+            it->region.height += (y-it->region.y-it->region.height);
+            // it->region.x=x;
+            // it->region.y=y;
+          }
       }
 }
 

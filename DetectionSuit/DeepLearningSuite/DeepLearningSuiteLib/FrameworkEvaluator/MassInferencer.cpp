@@ -96,7 +96,7 @@ MassInferencer::MassInferencer(DatasetReaderPtr reader, FrameworkInferencerPtr i
 void MassInferencer::BorderChange(int event, int x, int y, int flags, void* userdata){
     if(event == cv::EVENT_LBUTTONDOWN){
       int currFrame = ((MassInferencer *)(userdata))->playback.currentFrame();
-      LOG(INFO) << currFrame << std::endl;
+      // LOG(INFO) << currFrame << std::endl;
       (((MassInferencer *)(userdata))->detections)->at(currFrame-1).AdjustBox(x,y);
       cv::Mat imager = (((MassInferencer *)(userdata))->detections)->at(currFrame-1).getSampledColorImage();
       ((MassInferencer *)(userdata))->playback.updateFrame(currFrame-1,&imager);
@@ -105,9 +105,14 @@ void MassInferencer::BorderChange(int event, int x, int y, int flags, void* user
       cv::imshow("Detection", imager);
     }
      if(event == cv::EVENT_LBUTTONUP){
-       // ((Sample *)(userdata))->AdjustBox(x,y);
-       // ((Sample *)(userdata))->SetMousy(true);
-       // cv::imshow("Detection", ((Sample *)(userdata))->getSampledColorImage());
+       int currFrame = ((MassInferencer *)(userdata))->playback.currentFrame();
+       // LOG(INFO) << currFrame << std::endl;
+       (((MassInferencer *)(userdata))->detections)->at(currFrame-1).AdjustBox(x,y);
+       cv::Mat imager = (((MassInferencer *)(userdata))->detections)->at(currFrame-1).getSampledColorImage();
+       ((MassInferencer *)(userdata))->playback.updateFrame(currFrame-1,&imager);
+       // // ((Sample *)(userdata))->AdjustBox(x,y);
+       // // ((Sample *)(userdata))->SetMousy(true);
+       cv::imshow("Detection", imager);
      }
 }
 
