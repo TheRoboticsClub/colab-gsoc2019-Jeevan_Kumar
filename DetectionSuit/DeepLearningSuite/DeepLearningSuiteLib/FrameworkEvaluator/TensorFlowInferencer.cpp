@@ -2,11 +2,20 @@
 #include <DatasetConverters/ClassTypeGeneric.h>
 #include "TensorFlowInferencer.h"
 #include <glog/logging.h>
-TensorFlowInferencer::TensorFlowInferencer(const std::string &netConfig, const std::string &netWeights,const std::string& classNamesFile): netConfig(netConfig),netWeights(netWeights) {
 
+void TensorFlowInferencer::CallBackFunc(int event, int x, int y, int flags, void* userdata){
+	((TensorFlowInferencer *)(userdata))->mousy = true;
+	for(auto itr = ((TensorFlowInferencer *)(userdata))->detections.begin(); itr !=((TensorFlowInferencer *)(userdata))->detections.end() ; itr++){
+		itr->boundingBox.x = x;
+		itr->boundingBox.y = y;
+	}
+	// LOG(INFO) << "This is x : " << x << std::endl;
+}
+
+TensorFlowInferencer::TensorFlowInferencer(const std::string &netConfig, const std::string &netWeights,const std::string& classNamesFile): netConfig(netConfig),netWeights(netWeights) {
 	LOG(INFO) << "in tensorflow constructor" << '\n';
 	this->classNamesFile=classNamesFile;
-
+	this->mousy = false;
 	/* Code below adds path of python models to sys.path so as to enable python
 	interpreter to import custom python modules from the path mentioned. This will
 	prevent adding python path manually.
@@ -70,20 +79,22 @@ void TensorFlowInferencer::init()
 }
 
 Sample TensorFlowInferencer::detectImp(const cv::Mat &image, double confidence_threshold) {
-
+	// cv::setMouseCallback("Detection", TensorFlowInferencer::CallBackFunc ,this);
 	if(PyErr_CheckSignals() == -1) {
 		throw std::runtime_error("Keyboard Interrupt");
 	}
 
 	cv::Mat rgbImage;
 	cv::cvtColor(image,rgbImage,cv::COLOR_BGR2RGB);
+	if(!this->mousy){
 
-	this->detections.clear();						//remove previous detections
+		this->detections.clear();						//remove previous detections
 
-	int result = gettfInferences(rgbImage, confidence_threshold);
+		int result = gettfInferences(rgbImage, confidence_threshold);
 
-	if (result == 0) {
-		LOG(ERROR) << "Error Occured during getting inferences" << '\n';
+		if (result == 0) {
+			LOG(ERROR) << "Error Occured during getting inferences" << '\n';
+		}
 	}
 
 	Sample sample;
@@ -103,7 +114,9 @@ Sample TensorFlowInferencer::detectImp(const cv::Mat &image, double confidence_t
 
 	sample.setColorImage(image);
 	sample.setRectRegions(regions);
-    sample.setRleRegions(rleRegions);
+  sample.setRleRegions(rleRegions);
+	sample.SetMousy(this->mousy);
+	this->mousy=false;
 	return sample;
 }
 

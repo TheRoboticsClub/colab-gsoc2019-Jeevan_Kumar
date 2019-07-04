@@ -85,89 +85,101 @@ MassInferencer::MassInferencer(DatasetReaderPtr reader, FrameworkInferencerPtr i
         this->playback.AddTrackbar(time);
 }
 
+void MassInferencer::BorderChange(int event, int x, int y, int flags, void* userdata){
+     if(event == cv::EVENT_LBUTTONUP){
+       ((Sample *)(userdata))->AdjustBox(x,y);
+       ((Sample *)(userdata))->SetMousy(true);
+     }
+}
+
+void MassInferencer::IsProcessed(Sample *sample, int *counter , int *nsamples){
+  while (alreadyProcessed>0){
+    LOG(INFO) << "Already evaluated: " << sample->getSampleID() << "(" << *counter << "/" << *nsamples << ")" << std::endl;
+    this->reader->getNextSample(*sample);
+    *counter++;
+    alreadyProcessed--;
+  }
+}
+
+void MassInferencer::Shower(Sample *sample, Sample *detection,cv::Mat *image2detect, bool &useDepthImages){
+  if (this->debug) {
+      cv::Mat image =sample->getSampledColorImage();
+      Sample detectionWithImage=*detection;
+
+      if (useDepthImages)
+          detectionWithImage.setColorImage(sample->getDepthColorMapImage());
+      else
+          detectionWithImage.setColorImage(sample->getColorImage());
+
+      if (useDepthImages){
+          cv::imshow("GT on Depth", sample->getSampledDepthColorMapImage());
+          cv::imshow("Input", *image2detect);
+      }
+      char keystroke=cv::waitKey(1);
+      if(reader->IsValidFrame() && reader->IsVideo())
+        this->playback.GetInput(keystroke,detectionWithImage.getSampledColorImage(),image);
+      else{
+        cv::imshow("GT on RGB", image);
+        cv::imshow("Detection", detectionWithImage.getSampledColorImage());
+        cv::waitKey(100);
+      }
+  }
+}
+
+void MassInferencer::finder(Sample *sample , Sample *detection, cv::Mat *image2detect ,bool &useDepthImages, int *counter , int *nsamples){
+  *counter+=1;
+  if (this->stopDeployer != NULL && *(this->stopDeployer)) {
+      LOG(INFO) << "Deployer Process Stopped" << "\n";
+      return;
+  }
+
+  LOG(INFO) << "Evaluating : " << sample->getSampleID() << "(" << *counter << "/" << *nsamples << ")" << std::endl;
+
+  if (useDepthImages)
+      *image2detect = sample->getDepthColorMapImage();
+  else {
+      *image2detect = sample->getColorImage();
+  }
+
+  double thresh = this->confidence_threshold == NULL ? this->default_confidence_threshold
+                                                      : *(this->confidence_threshold);
+
+  try {
+      *detection=this->inferencer->detect(*image2detect, thresh);
+  }
+  catch(const std::runtime_error& error) {
+    LOG(ERROR) << "Error Occured: " << error.what() << '\n';
+    exit(1);
+  }
+
+  detection->setSampleID(sample->getSampleID());
+
+  if (saveOutput)
+      detection->save(this->resultsPath);
+
+}
+
 void MassInferencer::process(bool useDepthImages, DatasetReaderPtr readerDetection) {
 
     Sample sample;
     int counter=0;
     int nsamples = this->reader->getNumberOfElements();
-    while (alreadyProcessed>0){
-        LOG(INFO) << "Already evaluated: " << sample.getSampleID() << "(" << counter << "/" << nsamples << ")" << std::endl;
-        this->reader->getNextSample(sample);
-        counter++;
-        alreadyProcessed--;
-    }
 
-
-    while (this->reader->getNextSample(sample)){
-        counter++;
-        if (this->stopDeployer != NULL && *(this->stopDeployer)) {
-            LOG(INFO) << "Deployer Process Stopped" << "\n";
-            return;
-        }
-
-        LOG(INFO) << "Evaluating : " << sample.getSampleID() << "(" << counter << "/" << nsamples << ")" << std::endl;
-
-        cv::Mat image2detect;
-        if (useDepthImages)
-            image2detect = sample.getDepthColorMapImage();
-        else {
-            image2detect = sample.getColorImage();
-        }
-
-        Sample detection;
-
-        double thresh = this->confidence_threshold == NULL ? this->default_confidence_threshold
-                                                            : *(this->confidence_threshold);
-
-        try {
-
-          detection=this->inferencer->detect(image2detect, thresh);
-
-        } catch(const std::runtime_error& error) {
-          LOG(ERROR) << "Error Occured: " << error.what() << '\n';
-          exit(1);
-        }
-
-        detection.setSampleID(sample.getSampleID());
-
-        if (saveOutput)
-            detection.save(this->resultsPath);
-
-        if (this->debug) {
-            cv::Mat image =sample.getSampledColorImage();
-            Sample detectionWithImage;
-            detectionWithImage=detection;
-            if (useDepthImages)
-                detectionWithImage.setColorImage(sample.getDepthColorMapImage());
-            else
-                detectionWithImage.setColorImage(sample.getColorImage());
-            // cv::imshow("GT on RGB", image);
-            if (useDepthImages){
-                cv::imshow("GT on Depth", sample.getSampledDepthColorMapImage());
-                cv::imshow("Input", image2detect);
-            }
-            // cv::imshow("Detection", detectionWithImage.getSampledColorImage());
-            // cv::waitKey(100);
-            char keystroke=cv::waitKey(1);
-            if(reader->IsValidFrame() && reader->IsVideo())
-              this->playback.GetInput(keystroke,detectionWithImage.getSampledColorImage(),image);
-            else{
-              cv::imshow("GT on RGB", image);
-              cv::imshow("Detection", detectionWithImage.getSampledColorImage());
-              cv::waitKey(100);
-
-            }
-        }
-
+    MassInferencer::IsProcessed(&sample,&counter,&nsamples);
+    cv::Mat image2detect;
+    static Sample detection;
+    cv::setMouseCallback("Detection", MassInferencer::BorderChange ,&detection);
+    bool read_succesful = true;
+    while (read_succesful){
+        read_succesful=this->reader->getNextSample(sample);
+        MassInferencer::finder(&sample,&detection,&image2detect,useDepthImages,&counter,&nsamples);
+        MassInferencer::Shower(&sample,&detection,&image2detect,useDepthImages);
         detection.clearColorImage();
         detection.clearDepthImage();
-
-        if (readerDetection != NULL) {
+        if (readerDetection != NULL)
             readerDetection->addSample(detection);
-            //samples->push_back(detection);
-        }
-
     }
+
     if(!reader->IsValidFrame()){
       this->playback.completeShow();
       cv::destroyAllWindows();
@@ -176,6 +188,8 @@ void MassInferencer::process(bool useDepthImages, DatasetReaderPtr readerDetecti
 
 
 }
+
+
 
 FrameworkInferencerPtr MassInferencer::getInferencer() const {
     return this->inferencer;

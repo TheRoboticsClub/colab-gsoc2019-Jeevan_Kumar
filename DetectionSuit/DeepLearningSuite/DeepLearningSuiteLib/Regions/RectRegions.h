@@ -26,6 +26,7 @@ struct RectRegions:Regions {
     void setRegions(std::vector<RectRegion> &data);
     // cv::Mat* getImage();
     void drawRegions(cv::Mat& image);
+    // void doit(cv::Mat& image);
     void filterSamplesByID(std::vector<std::string> filteredIDS);
     bool empty();
     void print();
@@ -35,6 +36,7 @@ struct RectRegions:Regions {
     // void img_pointer();
 
     std::vector<RectRegion> regions;
+    // cv::Mat img;
 };
 
 

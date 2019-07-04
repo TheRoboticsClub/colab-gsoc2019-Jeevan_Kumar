@@ -58,7 +58,9 @@ struct Sample {
     void filterSamplesByID(std::vector<std::string> filteredIDS);
     std::string getSampleID();
     // void GetPoints(void *userdata);
-
+    void SetMousy(bool mousy);
+    bool GetMousy();
+    void AdjustBox(int x,int y);
 
 private:
     RectRegionsPtr rectRegions;
@@ -71,6 +73,7 @@ private:
     std::string sampleID;
     int width = -1;
     int height = -1;
+    bool mousy;
     // std::vector<int> *selected;
 };
 

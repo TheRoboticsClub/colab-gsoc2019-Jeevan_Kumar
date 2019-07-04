@@ -15,18 +15,18 @@ Sample::Sample() {
     this->contourRegions=ContourRegionsPtr(new ContourRegions());
     this->rleRegions=RleRegionsPtr(new RleRegions());
     // this->selected = new std::vector<int>
-    cv::setMouseCallback("Detection", Sample::CallBackFunc ,this);
+    // cv::setMouseCallback("Detection", Sample::CallBackFunc ,this);
 }
 
 Sample::Sample(const cv::Mat &colorImage) {
     colorImage.copyTo(this->colorImage);
-    cv::setMouseCallback("Detection", Sample::CallBackFunc ,&this->rectRegions);
+    // cv::setMouseCallback("Detection", Sample::CallBackFunc ,&this->rectRegions);
 }
 
 Sample::Sample(const cv::Mat &colorImage, const RectRegionsPtr &rectRegions) {
     this->setColorImage(colorImage);
     this->setRectRegions(rectRegions);
-    cv::setMouseCallback("Detection", Sample::CallBackFunc ,&this->rectRegions);
+    // cv::setMouseCallback("Detection", Sample::CallBackFunc ,&this->rectRegions);
 }
 
 Sample::Sample(const cv::Mat &colorImage, const ContourRegionsPtr &contourRegions) {
@@ -267,8 +267,18 @@ void Sample::print() {
         LOG(INFO) << "Class: " << it->classID << '\n';
         LOG(INFO) << "Confidence: " << it->confidence_score << '\n';
         LOG(INFO) << "uniqObjectID" << it->uniqObjectID <<'\n';
+        // it->region.x=x;
+        // it->region.y=y;
         LOG(INFO) << "BBOX" << it->region.x << it->region.y << it->region.width << it->region.height << '\n';
     }
+    // LOG(INFO) << "Fuddu : " << this->rectRegions->regions.size() << std::endl;
+}
+
+void Sample::AdjustBox(int x, int y){
+      for (auto it = this->rectRegions->regions.begin(); it != this->rectRegions->regions.end(); it++) {
+          it->region.x=x;
+          it->region.y=y;
+      }
 }
 
 bool Sample::show(const std::string readerImplementation, const std::string windowName, const int waitKey, const bool showDepth) {
@@ -392,8 +402,9 @@ cv::Mat Sample::getSampledDepthColorMapImage(double alpha, double beta) const {
 void Sample::CallBackFunc(int event, int x, int y, int flags, void* userdata){
      if(event == cv::EVENT_LBUTTONUP){
        // check(userdata);
-         std::vector<RectRegion> regionsToPrint = ((Sample *)userdata)->rectRegions->getRegions();
-         for (auto it = regionsToPrint.begin(); it != regionsToPrint.end(); it++) {
+         // std::vector<RectRegion> regionsToPrint = ((Sample *)userdata)->rectRegions->getRegions();
+         RectRegions jumma = *(((Sample *)userdata)->rectRegions);
+         for (auto it = jumma.getRegions().begin(); it != jumma.getRegions().end(); it++) {
              LOG(INFO) << "Class: " << it->classID << '\n';
              LOG(INFO) << "Confidence: " << it->confidence_score << '\n';
              // LOG(INFO) << "uniqObjectID" << it->uniqObjectID <<'\n';
@@ -402,9 +413,17 @@ void Sample::CallBackFunc(int event, int x, int y, int flags, void* userdata){
          }
          // const RectRegionsPtr& regions = regionsToPrint;
        // setRectRegions(regionss);
-       
+
      }
      if  ( event == cv::EVENT_LBUTTONUP ){
      LOG(INFO) << " This sis  : " << (((Sample *)(userdata))->rectRegions->getRegions()).size() << std::endl;
      }
+}
+
+void Sample::SetMousy(bool mousy){
+  this->mousy = mousy;
+}
+
+bool Sample::GetMousy(){
+  return this->mousy;
 }

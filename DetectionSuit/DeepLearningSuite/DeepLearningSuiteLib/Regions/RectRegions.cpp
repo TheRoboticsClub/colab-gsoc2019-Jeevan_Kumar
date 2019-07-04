@@ -127,9 +127,16 @@ RectRegion RectRegions::getRegion(int id) {
 //   this->mouse.second=y;
 // }
 
+// void RectRegions::CallBackFunc(int event, int x, int y, int flags, void* userdata){
+//         // LOG(INFO) << "This is fintec : " << it->region.x << std::endl;
+//     // RectRegions::drawRegions(((RectRegions *)(userdata))->img);
+// }
+
+
+
 void RectRegions::drawRegions(cv::Mat &image) {
   // std::pair<int ,int > mouser(0,0);
-  // cv::setMouseCallback("Detection", RectRegions::CallBackFunc ,&this->mouse);
+  // this->img=image;
     if (!image.empty())
         for (auto it = regions.begin(), end=regions.end(); it != end; ++it) {
             ClassTypeOwn classType(it->classID);
