@@ -8,6 +8,8 @@
 #include <Regions/RectRegions.h>
 #include <Regions/ContourRegions.h>
 #include <Regions/RleRegions.h>
+#include <QApplication>
+#include <Utils/setclass.h>
 
 struct Sample {
     Sample(const std::string& path, const std::string& id, bool loadDepth=true);
@@ -61,6 +63,7 @@ struct Sample {
     void SetMousy(bool mousy);
     bool GetMousy();
     void AdjustBox(int x,int y);
+    void SetClassy(int x, int y,std::vector<std::string> *classNames);
 
 private:
     RectRegionsPtr rectRegions;
@@ -74,6 +77,8 @@ private:
     int width = -1;
     int height = -1;
     bool mousy;
+    // QApplication *a;//(argc, argv);
+    // SetClass *w;
     // std::vector<int> *selected;
 };
 

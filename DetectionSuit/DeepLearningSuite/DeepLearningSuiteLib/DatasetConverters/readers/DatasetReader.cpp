@@ -187,3 +187,21 @@ bool DatasetReader::IsVideo(){
 long long int DatasetReader::TotalFrames(){
   return this->framesCount;
 }
+
+void DatasetReader::SetClassNamesFile(std::string *names){
+  this->classNamesFile = *names;
+  DatasetReader::SetClasses(this->classNamesFile);
+}
+
+void DatasetReader::SetClasses(const std::string& classesFile){
+  std::ifstream labelFile(classesFile);
+  std::string data;
+  this->classNames.clear();
+  while(getline(labelFile,data)) {
+      this->classNames.push_back(data);
+  }
+}
+
+std::vector<std::string>* DatasetReader::getClassNames(){
+  return &this->classNames;
+}

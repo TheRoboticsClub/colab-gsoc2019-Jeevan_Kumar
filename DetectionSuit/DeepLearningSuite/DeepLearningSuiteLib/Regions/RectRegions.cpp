@@ -157,7 +157,7 @@ void RectRegions::drawRegions(cv::Mat &image) {
                 nameRectangle.x=0;
             if (nameRectangle.y<0)
                 nameRectangle.y=0;
-
+            it->nameRect = nameRectangle;
             image(nameRectangle)=cv::Scalar(classType.getColor());
             cv::putText(image, classType.getClassString(),cv::Point(nameRectangle.x - nameRectangle.height/4 + 5 ,nameRectangle.y + nameRectangle.height - 5),cv::FONT_HERSHEY_TRIPLEX,0.4,cv::Scalar(0,0,0),1);
         }

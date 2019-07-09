@@ -20,6 +20,7 @@ MassInferencer::MassInferencer(DatasetReaderPtr reader, FrameworkInferencerPtr i
 MassInferencer::MassInferencer(DatasetReaderPtr reader, FrameworkInferencerPtr inferencer,
                                const std::string &resultsPath,double* confidence_threshold, bool debug): reader(reader), inferencer(inferencer), resultsPath(resultsPath),confidence_threshold(confidence_threshold),debug(debug)
 {
+
     if (resultsPath.empty())
         saveOutput = false;
     else
@@ -29,6 +30,7 @@ MassInferencer::MassInferencer(DatasetReaderPtr reader, FrameworkInferencerPtr i
     int time=0;
     time = reader->IsVideo() ? reader->TotalFrames() : 1 ;
     this->playback.AddTrackbar(time);
+    LOG(INFO) << reader->getClassNamesFile() << std::endl;
     if (!resultsPath.empty()) {
         auto boostPath= boost::filesystem::path(this->resultsPath);
         if (!boost::filesystem::exists(boostPath)){
@@ -61,6 +63,7 @@ MassInferencer::MassInferencer(DatasetReaderPtr reader, FrameworkInferencerPtr i
         saveOutput = true;
 
     this->detections = new std::vector<Sample>();
+    LOG(INFO) << reader->getClassNamesFile() << std::endl;
     int time=0;
     time = reader->IsVideo() ? reader->TotalFrames() : 1 ;
     this->playback.AddTrackbar(time);
@@ -87,6 +90,7 @@ MassInferencer::MassInferencer(DatasetReaderPtr reader, FrameworkInferencerPtr i
         //Constructor to avoid writing results to outputPath
         saveOutput = false;
         alreadyProcessed=0;
+        LOG(INFO) << reader->getClassNamesFile() << std::endl;
         this->detections = new std::vector<Sample>();
         int time=0;
         time = reader->IsVideo() ? reader->TotalFrames() : 1 ;
@@ -94,8 +98,16 @@ MassInferencer::MassInferencer(DatasetReaderPtr reader, FrameworkInferencerPtr i
 }
 
 void MassInferencer::BorderChange(int event, int x, int y, int flags, void* userdata){
-    if(event == cv::EVENT_LBUTTONDOWN){
-      int currFrame = ((MassInferencer *)(userdata))->playback.currentFrame();
+  int currFrame = ((MassInferencer *)(userdata))->playback.currentFrame();
+    if(event == cv::EVENT_MBUTTONDOWN){
+      (((MassInferencer *)(userdata))->detections)->at(currFrame-1).SetClassy(x,y,((MassInferencer *)(userdata))->reader->getClassNames());
+      // LOG(INFO) << " Sakumba " << ((MassInferencer *)(userdata))->reader->getClassNames()->size() << std::endl;
+      // cv::Mat imager = (((MassInferencer *)(userdata))->detections)->at(currFrame-1).getSampledColorImage();
+      // ((MassInferencer *)(userdata))->playback.updateFrame(currFrame-1,&imager);
+      // cv::imshow("Detection", imager);
+
+    }
+    else if(event == cv::EVENT_LBUTTONDOWN){
       // LOG(INFO) << currFrame << std::endl;
       (((MassInferencer *)(userdata))->detections)->at(currFrame-1).AdjustBox(x,y);
       cv::Mat imager = (((MassInferencer *)(userdata))->detections)->at(currFrame-1).getSampledColorImage();
@@ -114,6 +126,10 @@ void MassInferencer::BorderChange(int event, int x, int y, int flags, void* user
        // // ((Sample *)(userdata))->SetMousy(true);
        cv::imshow("Detection", imager);
      }
+    if(event == cv::EVENT_RBUTTONDOWN){
+        LOG(INFO) << " ClassNames file -> " << ((MassInferencer *)(userdata))->reader->getClassNamesFile() << std::endl;
+      }
+
 }
 
 void MassInferencer::IsProcessed(Sample *sample, int *counter , int *nsamples){
@@ -208,7 +224,7 @@ void MassInferencer::process(bool useDepthImages, DatasetReaderPtr readerDetecti
             readerDetection->addSample(detection);
     }
 
-    if(!reader->IsValidFrame()){
+    if(!this->reader->IsValidFrame()){
       this->playback.completeShow();
       cv::destroyAllWindows();
       LOG(INFO) << "Mean inference time: " << this->inferencer->getMeanDurationTime() << "(ms)" <<  std::endl;

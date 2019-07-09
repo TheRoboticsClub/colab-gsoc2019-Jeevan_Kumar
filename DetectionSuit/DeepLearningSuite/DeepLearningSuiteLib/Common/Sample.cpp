@@ -441,9 +441,9 @@ void Sample::CallBackFunc(int event, int x, int y, int flags, void* userdata){
          for (auto it = jumma.getRegions().begin(); it != jumma.getRegions().end(); it++) {
              LOG(INFO) << "Class: " << it->classID << '\n';
              LOG(INFO) << "Confidence: " << it->confidence_score << '\n';
-             // LOG(INFO) << "uniqObjectID" << it->uniqObjectID <<'\n';
+             LOG(INFO) << "uniqObjectID" << it->uniqObjectID <<'\n';
              LOG(INFO) << "BBOX" << it->region.x++ << " " << it->region.y++ << " " << it->region.width << " "  << it->region.height << '\n';
-             LOG(INFO) << " It has been executed\n";
+             // LOG(INFO) << " It has been executed\n";
          }
          // const RectRegionsPtr& regions = regionsToPrint;
        // setRectRegions(regionss);
@@ -460,4 +460,29 @@ void Sample::SetMousy(bool mousy){
 
 bool Sample::GetMousy(){
   return this->mousy;
+}
+
+void Sample::SetClassy(int x , int y, std::vector<std::string> *classNames){
+      for (auto it = this->rectRegions->regions.begin(); it != this->rectRegions->regions.end(); it++)
+          if(it->nameRect.x<x && it->nameRect.x+it->nameRect.width>x)
+            if(it->nameRect.y<y && it->nameRect.y+it->nameRect.height>y){
+              LOG(INFO) << "I'm inside rectName" << std::endl;
+              LOG(INFO) << "ClassId : " << it->classID <<std::endl;
+              // LOG(INFO) << "ClassName : " << classNames->at(std::stoi(it->classID)) <<std::endl;
+              it->classID="Gudumba";
+              char  arg0[] = "./DatasetEvaluationApp/DatasetEvaluationApp";
+              char  arg1[] = "-c";
+              char  arg2[] = "another arg";
+              char* argv[] = { &arg0[0], &arg1[0], &arg2[0], NULL };
+              int   argc   = (int)(sizeof(argv) / sizeof(argv[0])) - 1;
+              QApplication a(argc, argv);
+              SetClass w;
+              // std::string name = "names";
+              // std::string final;
+              // this->w->SetInit(&name,classNames,&final);
+              w.show();
+              // delete this->w;
+              // delete this->a;
+              // this->a->exec();
+            }
 }

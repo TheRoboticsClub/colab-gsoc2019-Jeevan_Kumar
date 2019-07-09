@@ -27,3 +27,7 @@ void ClassTypeGeneric::setId(int id) {
     this->classID=this->classes[id];
 }
 
+void ClassTypeGeneric::Print(){
+  for(auto itr=this->classes.begin();itr!=this->classes.end();itr++)
+      std::cout << *itr << std::endl;
+}

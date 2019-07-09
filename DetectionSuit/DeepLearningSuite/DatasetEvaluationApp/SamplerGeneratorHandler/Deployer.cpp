@@ -17,6 +17,7 @@ SampleGeneratorHandler::Deployer::process(QListView *deployImpList, QListView *w
                                           const std::string &inferencerNamesPath, const std::string &inputInfo, const std::string &outputFolder) {
 
     GenericLiveReaderPtr reader;
+    // LOG(INFO) << "Osat : " << inferencerNamesPath << std::endl;
 
     try {
 
@@ -83,8 +84,9 @@ SampleGeneratorHandler::Deployer::process(QListView *deployImpList, QListView *w
         }
 
     }
-
+    DatasetReaderPtr data_reader=reader->getReader();
+    data_reader->SetClassNamesFile(&inferencerNames[0]);
     GenericInferencerPtr inferencer(new GenericInferencer(netConfiguration[0],weights[0],inferencerNames[0],inferencerImp[0], inferencerParamsMap));
-    MassInferencer massInferencer(reader->getReader(),inferencer->getInferencer(),outputFolder, stopButton, confidence_threshold, true);
+    MassInferencer massInferencer(data_reader,inferencer->getInferencer(),outputFolder, stopButton, confidence_threshold, true);
     massInferencer.process(false);
 }

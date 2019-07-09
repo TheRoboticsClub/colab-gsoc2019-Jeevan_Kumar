@@ -3,7 +3,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 
-MESSAGE(${QT_INCLUDE_DIRS})
+# MESSAGE(${QT_INCLUDE_DIRS})
 
 SET(Utils_SOURCE_FILES
   StringHandler.h
@@ -17,6 +17,7 @@ SET(Utils_SOURCE_FILES
   PathHelper
   Playback
   pop_up
+  setclass
 )
 
 include_directories(

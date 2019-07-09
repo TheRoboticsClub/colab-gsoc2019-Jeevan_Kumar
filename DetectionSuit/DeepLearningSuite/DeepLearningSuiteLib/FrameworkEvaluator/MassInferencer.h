@@ -6,6 +6,7 @@
 #define SAMPLERGENERATOR_MASSINFERENCER_H
 
 #include <DatasetConverters/readers/DatasetReader.h>
+#include <DatasetConverters/ClassTypeGeneric.h>
 #include <FrameworkEvaluator/FrameworkInferencer.h>
 #include "Utils/Playback.hpp"
 

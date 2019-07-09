@@ -106,7 +106,7 @@ bool SampleGenerationApp::verifyRequirements() {
     for (auto it = this->requiredArguments.begin(), end =this->requiredArguments.end(); it != end; ++it){
         if (!this->config.keyExists(*it)){
             LOG(WARNING)<< "Key: " + *it + " is missing somewhere in the cofiguration file";
-            QApplication arm(this->argc,argv);// = new QApplication(this->argc,this->argv);
+            QApplication arm(this->argc,this->argv);// = new QApplication(this->argc,this->argv);
             pop_up win; // = new pop_up();// = new pop_up();
             win.SetPath(this->path);
             win.SetName(*it);
@@ -121,7 +121,7 @@ bool SampleGenerationApp::verifyRequirements() {
         }
 
     }
-    
+
     if(!success)
       success=SampleGenerationApp::verifyRequirements();
     return success;

@@ -28,6 +28,9 @@ public:
     virtual bool appendDataset(const std::string& datasetPath, const std::string& datasetPrefix="");
     void addSample(Sample sample);
     std::string getClassNamesFile();
+    void SetClassNamesFile(std::string *names);
+    void SetClasses(const std::string& classesFile);
+    std::vector<std::string>* getClassNames();
     virtual ~DatasetReader();
     bool IsVideo();
     bool IsValidFrame();

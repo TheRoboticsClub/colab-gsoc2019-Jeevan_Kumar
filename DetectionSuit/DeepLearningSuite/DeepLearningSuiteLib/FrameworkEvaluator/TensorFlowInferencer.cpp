@@ -99,7 +99,7 @@ Sample TensorFlowInferencer::detectImp(const cv::Mat &image, double confidence_t
 
 	Sample sample;
 	RectRegionsPtr regions(new RectRegions());
-    RleRegionsPtr rleRegions(new RleRegions());
+  RleRegionsPtr rleRegions(new RleRegions());
 	ClassTypeGeneric typeConverter(classNamesFile);
 
 	for (auto it = detections.begin(), end=detections.end(); it !=end; ++it){
