@@ -101,10 +101,10 @@ void MassInferencer::BorderChange(int event, int x, int y, int flags, void* user
   int currFrame = ((MassInferencer *)(userdata))->playback.currentFrame();
     if(event == cv::EVENT_MBUTTONDOWN){
       (((MassInferencer *)(userdata))->detections)->at(currFrame-1).SetClassy(x,y,((MassInferencer *)(userdata))->reader->getClassNames());
-      // LOG(INFO) << " Sakumba " << ((MassInferencer *)(userdata))->reader->getClassNames()->size() << std::endl;
-      // cv::Mat imager = (((MassInferencer *)(userdata))->detections)->at(currFrame-1).getSampledColorImage();
-      // ((MassInferencer *)(userdata))->playback.updateFrame(currFrame-1,&imager);
-      // cv::imshow("Detection", imager);
+      LOG(INFO) << " Sakumba " << ((MassInferencer *)(userdata))->reader->getClassNames()->size() << std::endl;
+      cv::Mat imager = (((MassInferencer *)(userdata))->detections)->at(currFrame-1).getSampledColorImage();
+      ((MassInferencer *)(userdata))->playback.updateFrame(currFrame-1,&imager);
+      cv::imshow("Detection", imager);
 
     }
     else if(event == cv::EVENT_LBUTTONDOWN){
@@ -112,11 +112,9 @@ void MassInferencer::BorderChange(int event, int x, int y, int flags, void* user
       (((MassInferencer *)(userdata))->detections)->at(currFrame-1).AdjustBox(x,y);
       cv::Mat imager = (((MassInferencer *)(userdata))->detections)->at(currFrame-1).getSampledColorImage();
       ((MassInferencer *)(userdata))->playback.updateFrame(currFrame-1,&imager);
-      // // ((Sample *)(userdata))->AdjustBox(x,y);
-      // // ((Sample *)(userdata))->SetMousy(true);
       cv::imshow("Detection", imager);
     }
-     if(event == cv::EVENT_LBUTTONUP){
+    else if(event == cv::EVENT_LBUTTONUP){
        int currFrame = ((MassInferencer *)(userdata))->playback.currentFrame();
        // LOG(INFO) << currFrame << std::endl;
        (((MassInferencer *)(userdata))->detections)->at(currFrame-1).AdjustBox(x,y);

@@ -11,6 +11,8 @@
 #include <QApplication>
 #include <Utils/setclass.h>
 
+
+
 struct Sample {
     Sample(const std::string& path, const std::string& id, bool loadDepth=true);
     Sample();
@@ -59,7 +61,6 @@ struct Sample {
     bool isValid();
     void filterSamplesByID(std::vector<std::string> filteredIDS);
     std::string getSampleID();
-    // void GetPoints(void *userdata);
     void SetMousy(bool mousy);
     bool GetMousy();
     void AdjustBox(int x,int y);
@@ -77,9 +78,6 @@ private:
     int width = -1;
     int height = -1;
     bool mousy;
-    // QApplication *a;//(argc, argv);
-    // SetClass *w;
-    // std::vector<int> *selected;
 };
 
 

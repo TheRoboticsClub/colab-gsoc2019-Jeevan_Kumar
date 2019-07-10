@@ -12,15 +12,12 @@ SetClass::~SetClass(){
 }
 
 void SetClass::HandlePushButton_ok(){
-    // *(this->name_f)=ui->comboBox->currentText().toUtf8().constData();
-    return ;
-    QApplication::quit();
-    // QCoreApplication::quit();
+    *(this->name_f)= ui->comboBox->currentText().toUtf8().constData();
+    delete this;
 }
 
 void SetClass::HandlePushButton_cancel(){
-    QApplication::quit();
-    // QCoreApplication::quit();
+    delete this;
 }
 
 void SetClass::SetInit(std::string *str , std::vector<std::string>*classNames,std::string *name_f){
@@ -28,5 +25,12 @@ void SetClass::SetInit(std::string *str , std::vector<std::string>*classNames,st
     for(unsigned int i=0;i<classNames->size();i++){
         ui->comboBox->addItem(QString::fromStdString(classNames->at(i)));
     }
+    // *name_f = "hi";
     this->name_f=name_f;
+}
+
+void SetClass::wait(){
+  QEventLoop loop;
+  connect(this, SIGNAL(destroyed()), &loop, SLOT(quit()));
+  loop.exec();
 }

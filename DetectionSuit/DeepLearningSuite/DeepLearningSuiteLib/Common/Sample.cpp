@@ -463,26 +463,16 @@ bool Sample::GetMousy(){
 }
 
 void Sample::SetClassy(int x , int y, std::vector<std::string> *classNames){
+      // std::string final="";
       for (auto it = this->rectRegions->regions.begin(); it != this->rectRegions->regions.end(); it++)
           if(it->nameRect.x<x && it->nameRect.x+it->nameRect.width>x)
             if(it->nameRect.y<y && it->nameRect.y+it->nameRect.height>y){
               LOG(INFO) << "I'm inside rectName" << std::endl;
               LOG(INFO) << "ClassId : " << it->classID <<std::endl;
-              // LOG(INFO) << "ClassName : " << classNames->at(std::stoi(it->classID)) <<std::endl;
-              it->classID="Gudumba";
-              char  arg0[] = "./DatasetEvaluationApp/DatasetEvaluationApp";
-              char  arg1[] = "-c";
-              char  arg2[] = "another arg";
-              char* argv[] = { &arg0[0], &arg1[0], &arg2[0], NULL };
-              int   argc   = (int)(sizeof(argv) / sizeof(argv[0])) - 1;
-              QApplication a(argc, argv);
-              SetClass w;
-              // std::string name = "names";
-              // std::string final;
-              // this->w->SetInit(&name,classNames,&final);
-              w.show();
-              // delete this->w;
-              // delete this->a;
-              // this->a->exec();
+              SetClass *w = new SetClass();
+              w->SetInit(&it->classID,classNames,&it->classID);
+              w->show();
+              w->wait();
+              break;
             }
 }
