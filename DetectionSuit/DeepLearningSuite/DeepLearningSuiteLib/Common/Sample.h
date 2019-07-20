@@ -10,6 +10,7 @@
 #include <Regions/RleRegions.h>
 #include <QApplication>
 #include <Utils/setclass.h>
+#include <Utils/addclass.h>
 
 
 
@@ -63,9 +64,9 @@ struct Sample {
     std::string getSampleID();
     void SetMousy(bool mousy);
     bool GetMousy();
-    void AdjustBox(int x,int y);
+    bool AdjustBox(int x,int y);
     void SetClassy(int x, int y,std::vector<std::string> *classNames);
-
+    void AddDetection(cv::Rect &detection,std::vector<std::string> *classNames);
 private:
     RectRegionsPtr rectRegions;
     ContourRegionsPtr contourRegions;

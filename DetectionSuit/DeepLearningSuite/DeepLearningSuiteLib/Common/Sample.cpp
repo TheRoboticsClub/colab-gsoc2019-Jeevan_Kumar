@@ -208,7 +208,6 @@ void Sample::save(const std::string &outPath, int id) {
     std::stringstream ss ;
     ss << std::setfill('0') << std::setw(5) << id;
     this->save(outPath,ss.str());
-
 }
 
 void Sample::save(const std::string &outPath, const std::string &filename) {
@@ -286,33 +285,53 @@ int mod(int test){
     return test;
 }
 
-void Sample::AdjustBox(int x, int y){
+void Sample::AddDetection(cv::Rect &detection,std::vector<std::string> *classNames){
+  RectRegion temp;
+  temp.region.x = detection.x;
+  temp.region.y = detection.y;
+  temp.region.width = detection.width;
+  temp.region.height = detection.height;
+  AddClass *a = new AddClass();
+  a->SetInit(classNames,&temp.classID);
+  a->show();
+  a->wait();
+  // temp.classID = "gudumba";
+  if(temp.classID.length())
+    this->rectRegions->regions.push_back(temp);
+}
+
+bool Sample::AdjustBox(int x, int y){
       for (auto it = this->rectRegions->regions.begin(); it != this->rectRegions->regions.end(); it++) {
           if(mod(it->region.x-x)<20 && mod(it->region.y-y)<20){
             it->region.width  -= (x-it->region.x);
             it->region.height -= (y-it->region.y);
             it->region.x=x;
             it->region.y=y;
+            return true;
           }
           else if(mod(it->region.x+it->region.width-x)<20 && mod(it->region.y-y)<20){
             it->region.width  += (x-(it->region.x+it->region.width));
             it->region.height -= (y-it->region.y);
             // it->region.x=x;
             it->region.y=y;
+            return true;
           }
           else if(mod(it->region.x-x)<20 && mod(it->region.y+it->region.height-y)<20){
             it->region.width  -= (x-it->region.x);
             it->region.height += (y-(it->region.y+it->region.height));
             it->region.x=x;
+            return true;
             // it->region.y=y;
           }
           else if(mod(it->region.x+it->region.width-x)<20 && mod(it->region.y+it->region.height-y)<20){
             it->region.width  += (x-it->region.x-it->region.width);
             it->region.height += (y-it->region.y-it->region.height);
+            return true;
             // it->region.x=x;
             // it->region.y=y;
           }
       }
+      return false;
 }
 
 bool Sample::show(const std::string readerImplementation, const std::string windowName, const int waitKey, const bool showDepth) {
@@ -461,6 +480,7 @@ void Sample::SetMousy(bool mousy){
 bool Sample::GetMousy(){
   return this->mousy;
 }
+
 
 void Sample::SetClassy(int x , int y, std::vector<std::string> *classNames){
       // std::string final="";

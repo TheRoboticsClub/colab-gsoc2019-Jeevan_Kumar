@@ -8,6 +8,7 @@ SET(FrameworkEvaluator_SOURCE_FILES
   GenericInferencer
   TensorFlowInferencer
   KerasInferencer
+  labeling
 )
 
 IF(DARKNET_ACTIVE)

@@ -18,6 +18,7 @@ SET(Utils_SOURCE_FILES
   Playback
   pop_up
   setclass
+  addclass
 )
 
 include_directories(

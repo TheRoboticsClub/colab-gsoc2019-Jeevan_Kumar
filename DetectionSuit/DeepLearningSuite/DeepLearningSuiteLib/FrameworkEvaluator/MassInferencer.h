@@ -6,7 +6,6 @@
 #define SAMPLERGENERATOR_MASSINFERENCER_H
 
 #include <DatasetConverters/readers/DatasetReader.h>
-#include <DatasetConverters/ClassTypeGeneric.h>
 #include <FrameworkEvaluator/FrameworkInferencer.h>
 #include "Utils/Playback.hpp"
 
@@ -19,10 +18,7 @@ public:
     MassInferencer(DatasetReaderPtr reader, FrameworkInferencerPtr inferencer, bool debug=true);
     void process(bool writeImages, DatasetReaderPtr readerDetection = NULL);
     FrameworkInferencerPtr getInferencer() const;
-    static void BorderChange(int event, int x, int y, int flags, void* userdata);
-    void IsProcessed(Sample *sample, int *counter , int *nsamples);
-    void Shower(Sample *sample, Sample *detection,cv::Mat *image2detect, bool &useDepthImages);
-    void finder(Sample *sample, Sample *detection,cv::Mat *image2detect, bool &useDepthImages, int *counter , int *nsamples);
+
 private:
     DatasetReaderPtr reader;
     FrameworkInferencerPtr inferencer;
@@ -34,8 +30,6 @@ private:
     double* confidence_threshold = NULL;
     double default_confidence_threshold = 0.2;
     Playback playback;
-    std::vector<Sample> *detections;
-    bool mousy;
 };
 
 

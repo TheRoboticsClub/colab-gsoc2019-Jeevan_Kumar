@@ -25,7 +25,6 @@ private slots:
 private:
     Ui::SetClass *ui;
     std::string *name_f;
-    // bool ok_pressed;
 };
 
 #endif // SETCLASS_H

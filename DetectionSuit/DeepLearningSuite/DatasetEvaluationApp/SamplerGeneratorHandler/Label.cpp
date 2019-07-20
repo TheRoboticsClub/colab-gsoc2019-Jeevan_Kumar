@@ -6,7 +6,6 @@
 #include <gui/Utils.h>
 #include <FrameworkEvaluator/GenericInferencer.h>
 #include <FrameworkEvaluator/MassInferencer.h>
-#include <FrameworkEvaluator/labeling.h>
 #include "Deployer.h"
 #include "SamplerGenerationHandler.h"
 #include "gui/Appcfg.hpp"
@@ -15,7 +14,7 @@ void
 SampleGeneratorHandler::Deployer::process(QListView *deployImpList, QListView *weightsList, QListView *netConfigList,
                                           QListView *inferencerImpList, QListView *inferencerNamesList,
                                           bool* stopButton, double* confidence_threshold, QGroupBox* deployer_params, QGroupBox* camera_params, QGroupBox* inferencer_params, const std::string &weightsPath, const std::string &cfgPath,
-                                          const std::string &inferencerNamesPath, const std::string &inputInfo, const std::string &outputFolder,bool labeling) {
+                                          const std::string &inferencerNamesPath, const std::string &inputInfo, const std::string &outputFolder) {
 
     GenericLiveReaderPtr reader;
     // LOG(INFO) << "Osat : " << inferencerNamesPath << std::endl;
@@ -88,13 +87,6 @@ SampleGeneratorHandler::Deployer::process(QListView *deployImpList, QListView *w
     DatasetReaderPtr data_reader=reader->getReader();
     data_reader->SetClassNamesFile(&inferencerNames[0]);
     GenericInferencerPtr inferencer(new GenericInferencer(netConfiguration[0],weights[0],inferencerNames[0],inferencerImp[0], inferencerParamsMap));
-    if(labeling){
-      Labeling massInferencer(data_reader,inferencer->getInferencer(),outputFolder, stopButton, confidence_threshold, true);
-      massInferencer.process(false);
-    }
-    else{
-      MassInferencer massInferencer(data_reader,inferencer->getInferencer(),outputFolder, stopButton, confidence_threshold, true);
-      massInferencer.process(false);
-    }
-
+    MassInferencer massInferencer(data_reader,inferencer->getInferencer(),outputFolder, stopButton, confidence_threshold, true);
+    massInferencer.process(false);
 }
