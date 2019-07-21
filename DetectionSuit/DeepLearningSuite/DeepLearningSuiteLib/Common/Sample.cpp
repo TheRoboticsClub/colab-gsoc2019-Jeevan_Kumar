@@ -292,10 +292,9 @@ void Sample::AddDetection(cv::Rect &detection,std::vector<std::string> *classNam
   temp.region.width = detection.width;
   temp.region.height = detection.height;
   AddClass *a = new AddClass();
-  a->SetInit(classNames,&temp.classID);
+  a->SetInit(classNames,&temp.classID,&temp.confidence_score);
   a->show();
   a->wait();
-  // temp.classID = "gudumba";
   if(temp.classID.length())
     this->rectRegions->regions.push_back(temp);
 }

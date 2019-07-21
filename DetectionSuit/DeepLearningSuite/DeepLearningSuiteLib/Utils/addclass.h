@@ -16,7 +16,7 @@ class AddClass : public QMainWindow
 public:
     explicit AddClass(QWidget *parent = 0);
     ~AddClass();
-    void SetInit(std::vector<std::string> *classNames,std::string *name_f);
+    void SetInit(std::vector<std::string> *classNames,std::string *name_f,double *probability);
     void wait();
 
 private slots:
@@ -27,6 +27,7 @@ private slots:
 private:
     Ui::AddClass *ui;
     std::string *name_f;
+    double *probability;
 };
 
 #endif // ADDCLASS_H

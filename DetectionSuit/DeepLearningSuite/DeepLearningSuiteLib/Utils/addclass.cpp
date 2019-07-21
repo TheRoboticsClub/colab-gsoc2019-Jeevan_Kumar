@@ -16,7 +16,8 @@ AddClass::~AddClass(){
 void AddClass::HandlePushButton_ok(){
     *(this->name_f) =  ui->checkBox->isChecked() ? ui->comboBox->currentText().toUtf8().constData() :
                                                    ui->lineEdit->text().toUtf8().constData() ;
-   if(! this->name_f->length())
+    *(this->probability) = ui->probability->text().toDouble();
+   if(!this->name_f->length() || !ui->probability->text().length())
      return;
     delete this;
 }
@@ -25,10 +26,11 @@ void AddClass::HandlePushButton_cancel(){
     delete this;
 }
 
-void AddClass::SetInit(std::vector<std::string>*classNames,std::string *name_f){
+void AddClass::SetInit(std::vector<std::string>*classNames,std::string *name_f,double *probability){
     for(unsigned int i=0;i<classNames->size();i++)
         ui->comboBox->addItem(QString::fromStdString(classNames->at(i)));
     this->name_f=name_f;
+    this->probability = probability;
 }
 
 void AddClass::wait(){
