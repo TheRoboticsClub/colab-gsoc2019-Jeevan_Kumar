@@ -111,6 +111,7 @@ endif(OpenCV_FOUND)
  add_subdirectory(SampleGenerationApp)
  add_subdirectory(Tools)
 
+add_subdirectory(detection_suite)
 
  file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/ClassMappingHierarchy.xml
      DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

@@ -16,7 +16,11 @@ public:
     MassInferencer(DatasetReaderPtr reader, FrameworkInferencerPtr inferencer, const std::string &resultsPath, bool* stopDeployer, double* confidence_threshold = NULL, bool debug=true);
     MassInferencer(DatasetReaderPtr reader, FrameworkInferencerPtr inferencer, double* confidence_threshold = NULL, bool debug=true);
     MassInferencer(DatasetReaderPtr reader, FrameworkInferencerPtr inferencer, bool debug=true);
+    MassInferencer(FrameworkInferencerPtr inferencer, const std::string &resultsPath, double* confidence_threshold , bool debug);
+
     void process(bool writeImages, DatasetReaderPtr readerDetection = NULL);
+    void process(bool writeImages, cv::Mat image2detect);
+    
     FrameworkInferencerPtr getInferencer() const;
 
 private:

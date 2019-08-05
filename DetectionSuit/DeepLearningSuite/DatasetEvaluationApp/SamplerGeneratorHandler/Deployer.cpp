@@ -51,7 +51,7 @@ SampleGeneratorHandler::Deployer::process(QListView *deployImpList, QListView *w
 
     std::vector<std::string> inferencerNames;
     if (! Utils::getListViewContent(inferencerNamesList,inferencerNames,inferencerNamesPath + "/")){
-        LOG(WARNING)<<"Select the inferencer type";
+        LOG(WARNING)<<"Select the class names";
         return;
     }
 
@@ -87,6 +87,7 @@ SampleGeneratorHandler::Deployer::process(QListView *deployImpList, QListView *w
     }
     DatasetReaderPtr data_reader=reader->getReader();
     data_reader->SetClassNamesFile(&inferencerNames[0]);
+    LOG(INFO) << "netConfigList : " << netConfiguration[0] << " ; weights : " << weights[0] << " ; inferencerNames : " << inferencerNames[0] << " ; inferencerImp : " << inferencerImp[0] << std::endl;
     GenericInferencerPtr inferencer(new GenericInferencer(netConfiguration[0],weights[0],inferencerNames[0],inferencerImp[0], inferencerParamsMap));
     if(labeling){
       Labeling massInferencer(data_reader,inferencer->getInferencer(),outputFolder, stopButton, confidence_threshold, true);

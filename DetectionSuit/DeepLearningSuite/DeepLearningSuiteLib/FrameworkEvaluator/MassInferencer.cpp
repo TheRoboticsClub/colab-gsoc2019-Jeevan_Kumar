@@ -81,6 +81,24 @@ MassInferencer::MassInferencer(DatasetReaderPtr reader, FrameworkInferencerPtr i
         this->playback.AddTrackbar(time);
 }
 
+MassInferencer::MassInferencer(FrameworkInferencerPtr inferencer, const std::string &resultsPath, double* confidence_threshold = NULL, bool debug=true):inferencer(inferencer), confidence_threshold(confidence_threshold), debug(debug), resultsPath(resultsPath){
+  saveOutput = resultsPath.empty() ? false : true ;
+  alreadyProcessed=0;
+
+  if (!resultsPath.empty()) {
+      auto boostPath= boost::filesystem::path(this->resultsPath);
+      if (!boost::filesystem::exists(boostPath)){
+          boost::filesystem::create_directories(boostPath);
+      }
+      else{
+          LOG(WARNING)<<"Output directory already exists";
+          LOG(WARNING)<<"Files might be overwritten, if present in the directory";
+          boost::filesystem::directory_iterator end_itr;
+      }
+  }
+
+}
+
 void MassInferencer::process(bool useDepthImages, DatasetReaderPtr readerDetection) {
 
     Sample sample;
@@ -171,6 +189,31 @@ void MassInferencer::process(bool useDepthImages, DatasetReaderPtr readerDetecti
     }
 
 
+}
+
+void MassInferencer::process(bool useDepthImages, cv::Mat image2detect){
+
+      Sample detection;
+      double thresh = this->confidence_threshold == NULL ? this->default_confidence_threshold
+                                                          : *(this->confidence_threshold);
+
+      try {
+        detection=this->inferencer->detect(image2detect, thresh);
+      }
+      catch(const std::runtime_error& error) {
+        LOG(ERROR) << "Error Occured: " << error.what() << '\n';
+        exit(1);
+      }
+
+      if (saveOutput)
+          detection.save(this->resultsPath);
+
+      // cv::imshow("GT on RGB", image2detect);
+      cv::imshow("Detection", detection.getSampledColorImage());
+      // cv::waitKey(100);
+
+      detection.clearColorImage();
+      detection.clearDepthImage();
 }
 
 FrameworkInferencerPtr MassInferencer::getInferencer() const {
