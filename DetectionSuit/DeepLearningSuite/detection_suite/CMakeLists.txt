@@ -5,12 +5,6 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 cmake_minimum_required(VERSION 2.8.3)
 project(detection_suite)
 
-## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
-
-## Find catkin macros and libraries
-## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
-## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
@@ -229,6 +223,7 @@ include_directories(
         ${Boost_INCLUDE_DIR}
         ${QT_INCLUDE_DIRS}
         ${CMAKE_CURRENT_LIST_DIR}
+        ${CMAKE_CURRENT_LIST_DIR}/include/detectionsuite
         ${DeepLearningSuite_INCLUDE_DIR}
 )
 
@@ -249,6 +244,21 @@ target_link_libraries(code
 
 add_executable(detection_node src/detection_node.cpp)
 target_link_libraries(detection_node
+  DeepLearningSuite
+  ${OpenCV_LIBRARIES}
+  ${JderobotInterfaces_LIBRARIES}
+  ${EXTRA_LIBS}
+  ${Boost_LIBRARIES}
+  ${QT_LIBRARIES}
+  ${PYTHON_LIBRARIES}
+  ${GLOG_LIBRARIES}
+  ${PYTHON_LIBRARIES}
+  ssl
+  crypto
+)
+
+add_executable(test src/test.cpp include/detectionsuite/DeployerNode.hpp src/DeployerNode.cpp)
+target_link_libraries(test
   DeepLearningSuite
   ${OpenCV_LIBRARIES}
   ${JderobotInterfaces_LIBRARIES}
