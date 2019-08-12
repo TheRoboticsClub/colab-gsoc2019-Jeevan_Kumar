@@ -56,6 +56,7 @@ void DeployerNode::ros_to_cv(const sensor_msgs::ImageConstPtr& img ,DeployerNode
   std::vector<RectRegion> regionsToPrint = CurrFrame.getRectRegions()->getRegions();
   for (auto it = regionsToPrint.begin(); it != regionsToPrint.end(); it++) {
         node->detection.className = it->classID ;//<< '\n';node->detection.confidence = it->confidence_score ;
+        node->detection.confidence = it->confidence_score ;
         node->detection.x = it->region.x;
         node->detection.y = it->region.y;
         node->detection.height = it->region.height;
