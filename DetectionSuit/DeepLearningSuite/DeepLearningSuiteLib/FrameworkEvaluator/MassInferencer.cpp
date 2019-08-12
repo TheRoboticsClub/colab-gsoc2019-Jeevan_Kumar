@@ -212,10 +212,18 @@ void MassInferencer::process(bool useDepthImages, cv::Mat image2detect){
       cv::imshow("Detection", detection.getSampledColorImage());
       // cv::waitKey(100);
 
+      this->CurrFrame = detection;
       detection.clearColorImage();
       detection.clearDepthImage();
 }
 
 FrameworkInferencerPtr MassInferencer::getInferencer() const {
     return this->inferencer;
+}
+RectRegionsPtr MassInferencer::detections(){
+  return this->CurrFrame.getRectRegions();
+}
+
+Sample MassInferencer::getSample(){
+  return this->CurrFrame;
 }

@@ -20,9 +20,10 @@ public:
 
     void process(bool writeImages, DatasetReaderPtr readerDetection = NULL);
     void process(bool writeImages, cv::Mat image2detect);
-    
-    FrameworkInferencerPtr getInferencer() const;
 
+    FrameworkInferencerPtr getInferencer() const;
+    RectRegionsPtr detections();
+    Sample getSample();
 private:
     DatasetReaderPtr reader;
     FrameworkInferencerPtr inferencer;
@@ -34,6 +35,7 @@ private:
     double* confidence_threshold = NULL;
     double default_confidence_threshold = 0.2;
     Playback playback;
+    Sample CurrFrame;
 };
 
 

@@ -1,6 +1,9 @@
 #ifndef DEPLOYER_NODE
 #define DEPLOYER_NODE
 #include "std_msgs/String.h"
+#include "detection_suite/objects.h"
+#include "detection_suite/object.h"
+
 #include <typeinfo>
 
 #include <ros/ros.h>
@@ -13,13 +16,14 @@
 #include <FrameworkEvaluator/GenericInferencer.h>
 #include <FrameworkEvaluator/MassInferencer.h>
 #include <FrameworkEvaluator/labeling.h>
+#include <Regions/RectRegions.h>
 #include <yaml-cpp/yaml.h>
 
 class DeployerNode{
 public:
   DeployerNode(int argc, char *argv[]);
   ~DeployerNode();
-  static void ros_to_cv(const sensor_msgs::ImageConstPtr &ros_img , MassInferencer *massInferencer);
+  static void ros_to_cv(const sensor_msgs::ImageConstPtr &ros_img , DeployerNode *node);
   // void SubCallback(const sensor_msgs::ImageConstPtr& img);
   // void SubCallback(const cv::Mat& img);
 
@@ -31,6 +35,8 @@ private:
   GenericInferencer *inferencer;
   MassInferencer *massInferencer;
   std::string topic;
+  detection_suite::object detection;
+  detection_suite::objects detections;
 };
 
 #endif

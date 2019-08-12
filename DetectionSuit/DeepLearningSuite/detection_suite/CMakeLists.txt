@@ -14,20 +14,33 @@ find_package(catkin REQUIRED COMPONENTS
   cv_bridge
   image_transport
   sensor_msgs
+  message_generation
+)
+
+add_message_files(
+  FILES
+  object.msg
+  objects.msg
+)
+
+generate_messages(
+  DEPENDENCIES
+  std_msgs
 )
 
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES detection_suite
-#  CATKIN_DEPENDS roscpp rospy std_msgs
+ CATKIN_DEPENDS  message_runtime
 #  DEPENDS system_lib
 )
 
-include_directories(
-# include
-  ${catkin_INCLUDE_DIRS}
-  # ${OpenCV_INCLUDE_DIRS}
-)
+
+# include_directories(
+# # include
+#   ${catkin_INCLUDE_DIRS}
+#   # ${OpenCV_INCLUDE_DIRS}
+# )
 
 
 include_directories(
@@ -45,6 +58,7 @@ include_directories(
         ${CMAKE_CURRENT_LIST_DIR}
         ${CMAKE_CURRENT_LIST_DIR}/include/detectionsuite
         ${DeepLearningSuite_INCLUDE_DIR}
+        ${catkin_INCLUDE_DIRS}
 )
 
 add_executable(code src/code.cpp)
@@ -78,6 +92,8 @@ target_link_libraries(detection_node
 )
 
 add_executable(test src/test.cpp include/detectionsuite/DeployerNode.hpp src/DeployerNode.cpp)
+add_dependencies(test ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+
 target_link_libraries(test
   DeepLearningSuite
   ${OpenCV_LIBRARIES}
@@ -88,6 +104,7 @@ target_link_libraries(test
   ${PYTHON_LIBRARIES}
   ${GLOG_LIBRARIES}
   ${PYTHON_LIBRARIES}
+  ${catkin_LIBRARIES}
   ssl
   crypto
 )
