@@ -1,7 +1,8 @@
 #ifndef POP_UP_H
 #define POP_UP_H
 
-// #include <gui/Utils.h>
+// This is triggered if any of the required parameters are missing from the config file
+
 #include <QApplication>
 #include "QMainWindow"
 

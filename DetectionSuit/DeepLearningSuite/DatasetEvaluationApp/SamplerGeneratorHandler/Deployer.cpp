@@ -18,7 +18,6 @@ SampleGeneratorHandler::Deployer::process(QListView *deployImpList, QListView *w
                                           const std::string &inferencerNamesPath, const std::string &inputInfo, const std::string &outputFolder,bool labeling) {
 
     GenericLiveReaderPtr reader;
-    // LOG(INFO) << "Osat : " << inferencerNamesPath << std::endl;
 
     try {
 
@@ -31,13 +30,16 @@ SampleGeneratorHandler::Deployer::process(QListView *deployImpList, QListView *w
 
      }
 
+   // The below variable stores the selected weights's path
     std::vector<std::string> weights;
+   // If no weights has been selected warn the user to select and exit.
     if (! Utils::getListViewContent(weightsList,weights,weightsPath+ "/")){
         LOG(WARNING)<<"Select the weightsList";
         return;
     }
-
+    // The below variable stores the selected Configuration's path
     std::vector<std::string> netConfiguration;
+    // If no required Configuration has been selected warn the user to select and exit.
     if (! Utils::getListViewContent(netConfigList,netConfiguration,cfgPath+ "/")){
         LOG(WARNING)<<"Select the netConfiguration";
         return;
@@ -49,19 +51,28 @@ SampleGeneratorHandler::Deployer::process(QListView *deployImpList, QListView *w
         return;
     }
 
+    //Which inferencer to be used is stored it the below variable
     std::vector<std::string> inferencerNames;
+    // If no inferencer has been selected warn the user to select and exit.
     if (! Utils::getListViewContent(inferencerNamesList,inferencerNames,inferencerNamesPath + "/")){
         LOG(WARNING)<<"Select the class names";
         return;
     }
 
+    /*
+      If inferencer Parameters exists, store them in the Parameters map
+      else set the map to NULL.
+      This map only accesseble caffe is used as an inferencer.
+    */
     std::map<std::string, std::string>* inferencerParamsMap = new std::map<std::string, std::string>();
     try {
         if(! Utils::getInferencerParamsContent(inferencer_params, *inferencerParamsMap)) {
             inferencerParamsMap = NULL;
         }
 
-    } catch(std::exception& ex) {
+    }
+    // If something strange happens exit with logging the exceptions.
+    catch(std::exception& ex) {
         LOG(WARNING)<< ex.what();
         return;
     }

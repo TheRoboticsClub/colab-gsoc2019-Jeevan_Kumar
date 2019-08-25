@@ -1,5 +1,6 @@
 #ifndef PLAYBACK_RATES
 #define PLAYBACK_RATES
+// Code for controlling playback functionalities
 #include<iostream>
 #include <opencv2/opencv.hpp>
 #include <glog/logging.h>

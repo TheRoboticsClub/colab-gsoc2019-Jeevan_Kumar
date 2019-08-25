@@ -1,6 +1,8 @@
 #ifndef APPCONFIG_H
 #define APPCONFIG_H
 
+// This is the backend to select the required parameters graphically
+
 #include <QMainWindow>
 #include <yaml-cpp/yaml.h>
 
@@ -13,10 +15,11 @@ class appconfig : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit appconfig(QWidget *parent = 0);
-    ~appconfig();
-    YAML::Node return_node();
+    explicit appconfig(QWidget *parent = 0); // Constructor
+    ~appconfig(); // Destructor
+    YAML::Node return_node(); // Returns YAML node
 private slots:
+  // Callback functions to handle different buttons
     void handleToolbuttonWeights();
     void handleToolbuttonNames();
     void handleToolbuttonCfg();

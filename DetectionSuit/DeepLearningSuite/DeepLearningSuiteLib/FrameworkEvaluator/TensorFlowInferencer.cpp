@@ -3,6 +3,7 @@
 #include "TensorFlowInferencer.h"
 #include <glog/logging.h>
 
+// Construcor function for the tensorflow Inferencer
 void TensorFlowInferencer::CallBackFunc(int event, int x, int y, int flags, void* userdata){
 	((TensorFlowInferencer *)(userdata))->mousy = true;
 	for(auto itr = ((TensorFlowInferencer *)(userdata))->detections.begin(); itr !=((TensorFlowInferencer *)(userdata))->detections.end() ; itr++){
@@ -27,8 +28,13 @@ TensorFlowInferencer::TensorFlowInferencer(const std::string &netConfig, const s
 
 	std::string string_to_run = "import sys\nsys.path.append('" + dir_path + "')\n";
 
+	/* Initialize the python interpreter.Neccesary step to later call
+		 the python interpreter from any part of the application.*/
 	Py_Initialize();
 
+	/* Any python code is run in this format.
+		 str = "print('Hello World')"
+		 PyRun_SimpleString(str) */
 	PyRun_SimpleString(string_to_run.c_str());
 
 
@@ -84,12 +90,21 @@ Sample TensorFlowInferencer::detectImp(const cv::Mat &image, double confidence_t
 		throw std::runtime_error("Keyboard Interrupt");
 	}
 
+	/*
+		Initialize a matrix to store the image in RGB format.
+		Currently the format is BGR,below function cvtColor
+		takes the image and stores the new RGB format in rgbImage.
+	*/
 	cv::Mat rgbImage;
 	cv::cvtColor(image,rgbImage,cv::COLOR_BGR2RGB);
 	if(!this->mousy){
 
 		this->detections.clear();						//remove previous detections
 
+		/*
+			 Get the tensorflow inferences of an image/frame provided the image
+			 and the confidence threshold, and store them in result.
+		*/
 		int result = gettfInferences(rgbImage, confidence_threshold);
 
 		if (result == 0) {
@@ -102,16 +117,24 @@ Sample TensorFlowInferencer::detectImp(const cv::Mat &image, double confidence_t
   RleRegionsPtr rleRegions(new RleRegions());
 	ClassTypeGeneric typeConverter(classNamesFile);
 
-	for (auto it = detections.begin(), end=detections.end(); it !=end; ++it){
+	// Loop through all the new detections
+		for (auto it = detections.begin(), end=detections.end(); it !=end; ++it){
+			// Set the classID of the detected object.
+			typeConverter.setId(it->classId);
+			// Store the bounding boxes,class type,and its probability in regions
+			regions->add(it->boundingBox,typeConverter.getClassString(),it->probability);
+			// If masks are also available, store them aswell.
+			if (this->hasMasks)
+	        	rleRegions->add(it->rleRegion, typeConverter.getClassString(), it->probability);
+			//std::cout<< it->boundingBox.x << " " << it->boundingBox.y << " " << it->boundingBox.height << " " << it->boundingBox.width << std::endl;
+			LOG(INFO)<< typeConverter.getClassString() << ": " << it->probability << std::endl;
+		}
 
-		typeConverter.setId(it->classId);
-		regions->add(it->boundingBox,typeConverter.getClassString(),it->probability);
-		if (this->hasMasks)
-        	rleRegions->add(it->rleRegion, typeConverter.getClassString(), it->probability);
-		//std::cout<< it->boundingBox.x << " " << it->boundingBox.y << " " << it->boundingBox.height << " " << it->boundingBox.width << std::endl;
-		LOG(INFO)<< typeConverter.getClassString() << ": " << it->probability << std::endl;
-	}
-
+		/*
+			Store the image on which the detection is done,
+			the set of detections(both the bounding boxes and masks)
+			in the variable Sample.
+		*/
 	sample.setColorImage(image);
 	sample.setRectRegions(regions);
   sample.setRleRegions(rleRegions);
@@ -236,12 +259,14 @@ int TensorFlowInferencer::gettfInferences(const cv::Mat& image, double confidenc
 
 	int i, num_detections, dims, sizes[3];
 
+	// Check if it is RGB image and store the dimensions of the image in "sizes"
 	if (image.channels() == 3) {
 		dims = 3;
 		sizes[0] = image.rows;
 		sizes[1] = image.cols;
 		sizes[2] = image.channels();
 
+	// Check if it is a monochromatic image and repeat the above.
 	} else if (image.channels() == 1) {
 		dims = 2;
 		sizes[0] = image.rows;

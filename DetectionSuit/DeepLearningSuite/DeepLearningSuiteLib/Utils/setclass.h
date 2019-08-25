@@ -1,6 +1,6 @@
 #ifndef SETCLASS_H
 #define SETCLASS_H
-
+// This is used to change the class names of the wrongly detected classes.
 #include <iostream>
 #include <QMainWindow>
 #include <QEventLoop>

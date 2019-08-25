@@ -2,6 +2,7 @@
 // Created by frivas on 4/02/17.
 //
 
+// This is the main parent class of all the child like delpoyer,evaluator.
 #include "SampleGenerationApp.h"
 #include <glog/logging.h>
 
@@ -17,24 +18,26 @@ namespace
 
 } // namespace
 
-
+// Constructor
 SampleGenerationApp::SampleGenerationApp(int argc, char **argv):argc(argc),argv(argv) {
   // QApplication a(argc,argv);
   // this->a = new QApplication(argc,argv);
+    // Check if command line arguments are passed or not , if not passed return error
     if (parse_arguments(argc,argv,configFilePath) != SUCCESS){
         exit(1);
-        // LOG(INFO) << "This has missing parameters" << std::endl;
     }
-    // LOG(INFO)<< "Config File Path :" << configFilePath << std::endl;
+    // This loads the config file present at configFilePath which is passed
     config = jderobotconfig::loader::load(configFilePath);
     this->path= new std::string();
-    // QApplication arm(argc,argv);
-    // pop_up win;
-    //config=ConfigurationPtr( new Configuration(configFilePath));
 }
+
+// Constructor which is called if a node itself is directly passed instead of
+// configFilePath
 SampleGenerationApp::SampleGenerationApp(YAML::Node node){
   config = jderobotconfig::loader::load(node);
 }
+
+// If a filepath is passed , it is loaded
 SampleGenerationApp::SampleGenerationApp(std::string filepath, bool isPath){
   config = jderobotconfig::loader::load(filepath,true);
 }
@@ -94,45 +97,48 @@ int SampleGenerationApp::parse_arguments(const int argc, char* argv[], std::stri
 
 }
 
+// If all the requirements are satisfied this process further.
 void SampleGenerationApp::process() {
     if (verifyRequirements())
         (*this)();
 }
 
+// Check if all the required Parameters like evalpath,classnamesfile, weigths etc are present or not
 bool SampleGenerationApp::verifyRequirements() {
     bool success=true;
     this->config.showConfig();
     std::string msg;
+    // We loop through the requiredArguments vector and check if every one of
+    // them is present in the loaded configFile.
     for (auto it = this->requiredArguments.begin(), end =this->requiredArguments.end(); it != end; ++it){
         if (!this->config.keyExists(*it)){
             LOG(WARNING)<< "Key: " + *it + " is missing somewhere in the cofiguration file";
-            QApplication arm(this->argc,this->argv);// = new QApplication(this->argc,this->argv);
-            pop_up win; // = new pop_up();// = new pop_up();
+            // If certain Parameter is not present , a GUI is popped up to select
+            // that parameter
+            QApplication arm(this->argc,this->argv);
+            pop_up win;
             win.SetPath(this->path);
             win.SetName(*it);
             win.show();
             arm.exec();
-            // LOG(INFO) <<  "this->path = " << *(this->path) << std::endl;
+            // After selecting the property it is added to the config object
             this->config.SetProperty(*it,*(this->path));
             success=false;
             continue;
-            // SampleGenerationApp::verifyRequirements();
-            // std::cout << win.GetPath()  << std::endl;
         }
 
     }
-
+    // If not success , verify requirements again.
     if(!success)
       success=SampleGenerationApp::verifyRequirements();
     return success;
 }
 
+// Return the config parameter
 Config::Properties SampleGenerationApp::getConfig() {
     return config;
 }
 
+// Destructor function
 SampleGenerationApp::~SampleGenerationApp(){
-    // delete this->;
-    // delete this->w;
-    // delete this->a;
 }

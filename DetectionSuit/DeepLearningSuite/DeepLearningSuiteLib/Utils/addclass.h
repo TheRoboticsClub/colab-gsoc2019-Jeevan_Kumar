@@ -26,7 +26,9 @@ private slots:
 
 private:
     Ui::AddClass *ui;
+    // Final name
     std::string *name_f;
+    // Final probability
     double *probability;
 };
 

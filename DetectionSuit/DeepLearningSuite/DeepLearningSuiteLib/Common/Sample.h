@@ -2,6 +2,9 @@
 // Created by frivas on 22/01/17.
 //
 
+// This is the main variable which is shared across different components while
+// running DetectionSuite.
+
 #ifndef SAMPLERGENERATOR_SAMPLE_H
 #define SAMPLERGENERATOR_SAMPLE_H
 

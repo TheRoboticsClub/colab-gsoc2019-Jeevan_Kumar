@@ -8,50 +8,54 @@
 #include <boost/filesystem/operations.hpp>
 
 
+// Constructor which creates many variables
 Sample::Sample() {
     this->colorImagePath="";
     this->depthImagePath="";
     this->rectRegions=RectRegionsPtr(new RectRegions());
     this->contourRegions=ContourRegionsPtr(new ContourRegions());
     this->rleRegions=RleRegionsPtr(new RleRegions());
-    // this->selected = new std::vector<int>
-    // cv::setMouseCallback("Detection", Sample::CallBackFunc ,this);
 }
 
+//Constructor
 Sample::Sample(const cv::Mat &colorImage) {
     colorImage.copyTo(this->colorImage);
-    // cv::setMouseCallback("Detection", Sample::CallBackFunc ,&this->rectRegions);
 }
 
+//Constructor
 Sample::Sample(const cv::Mat &colorImage, const RectRegionsPtr &rectRegions) {
     this->setColorImage(colorImage);
     this->setRectRegions(rectRegions);
-    // cv::setMouseCallback("Detection", Sample::CallBackFunc ,&this->rectRegions);
 }
 
+//Constructor
 Sample::Sample(const cv::Mat &colorImage, const ContourRegionsPtr &contourRegions) {
     this->setColorImage(colorImage);
     this->setContourRegions(contourRegions);
 }
 
+//Constructor
 Sample::Sample(const cv::Mat &colorImage, const RectRegionsPtr &rectRegions, const ContourRegionsPtr &contourRegions) {
     this->setColorImage(colorImage);
     this->setRectRegions(rectRegions);
     this->setContourRegions(contourRegions);
 }
 
+//Constructor
 Sample::Sample(const cv::Mat &colorImage, const cv::Mat &depthImage, const RectRegionsPtr &rectRegions) {
     this->setColorImage(colorImage);
     this->setDepthImage(depthImage);
     this->setRectRegions(rectRegions);
 }
 
+//Constructor
 Sample::Sample(const cv::Mat &colorImage, const cv::Mat &depthImage, const ContourRegionsPtr &contourRegions) {
     this->setColorImage(colorImage);
     this->setDepthImage(depthImage);
     this->setContourRegions(contourRegions);
 }
 
+//Constructor
 Sample::Sample(const cv::Mat &colorImage, const cv::Mat &depthImage, const RectRegionsPtr &rectRegions,
                const ContourRegionsPtr &contourRegions) {
     this->setColorImage(colorImage);
@@ -61,11 +65,13 @@ Sample::Sample(const cv::Mat &colorImage, const cv::Mat &depthImage, const RectR
 
 }
 
+// Set the dimensions of the sample
 void Sample::setSampleDims(const int width, const int height) {
     this->width = width;
     this->height = height;
 }
 
+// Set the image colorImage member to the passed image
 void Sample::setColorImage(const cv::Mat &image) {
     image.copyTo(this->colorImage);
 }
@@ -80,10 +86,12 @@ void Sample::clearDepthImage() {            // For better memory management
         this->depthImage.release();
 }
 
+// Set the depthImage
 void Sample::setDepthImage(const cv::Mat &image) {
     image.copyTo(this->depthImage);
 }
 
+// Set the RectRegions member to the new regions
 void Sample::setRectRegions(const RectRegionsPtr &regions) {
     this->rectRegions=regions;
 }
@@ -167,6 +175,7 @@ cv::Mat Sample::getDepthImage() const{
         return this->depthImage.clone();
 }
 
+// Constructor
 Sample::Sample(const std::string &path, const std::string &id,bool loadDepth) {
     this->colorImagePath=path + "/"  + id + ".png";
 
@@ -212,7 +221,6 @@ void Sample::save(const std::string &outPath, int id) {
 
 void Sample::save(const std::string &outPath, const std::string &filename) {
 
-
     if (this->colorImage.empty()){
         if (!this->colorImagePath.empty())
             if (boost::filesystem::exists(boost::filesystem::path(this->colorImagePath))) {
@@ -256,41 +264,34 @@ void Sample::save(const std::string &outPath) {
 
 }
 
+// Print the detections
 void Sample::print() {
-
     LOG(INFO) << "Printing Regions with Classes" << '\n';
-
     std::vector<RectRegion> regionsToPrint = this->rectRegions->getRegions();
-
     for (auto it = regionsToPrint.begin(); it != regionsToPrint.end(); it++) {
         LOG(INFO) << "Class: " << it->classID << '\n';
         LOG(INFO) << "Confidence: " << it->confidence_score << '\n';
         LOG(INFO) << "uniqObjectID" << it->uniqObjectID <<'\n';
-        // it->region.x=x;
-        // it->region.y=y;
         LOG(INFO) << "BBOX" << it->region.x << it->region.y << it->region.width << it->region.height << '\n';
     }
-    // LOG(INFO) << "Fuddu : " << this->rectRegions->regions.size() << std::endl;
 }
 
-// void calculator(int x,int y,int height,int width,int newX, int newY,int temp){
-//     switch (temp1) {
-//       case /* value */:
-//     }
-// }
 
+// To get a positive number 
 int mod(int test){
     if(test<0)
       return -test;
     return test;
 }
 
+// Adds detections to the frame
 void Sample::AddDetection(cv::Rect &detection,std::vector<std::string> *classNames){
   RectRegion temp;
   temp.region.x = detection.x;
   temp.region.y = detection.y;
   temp.region.width = detection.width;
   temp.region.height = detection.height;
+  // To get the class names and probability from the user.
   AddClass *a = new AddClass();
   a->SetInit(classNames,&temp.classID,&temp.confidence_score);
   a->show();
@@ -299,7 +300,11 @@ void Sample::AddDetection(cv::Rect &detection,std::vector<std::string> *classNam
     this->rectRegions->regions.push_back(temp);
 }
 
+// Adjust the bounding boxes , and if successfully changed any boundary return true
+// else false.
 bool Sample::AdjustBox(int x, int y){
+  // x and y are current mouse pointer positions
+  // Find the corner which is nearer to the mouse pointer
       for (auto it = this->rectRegions->regions.begin(); it != this->rectRegions->regions.end(); it++) {
           if(mod(it->region.x-x)<20 && mod(it->region.y-y)<20){
             it->region.width  -= (x-it->region.x);
@@ -311,7 +316,6 @@ bool Sample::AdjustBox(int x, int y){
           else if(mod(it->region.x+it->region.width-x)<20 && mod(it->region.y-y)<20){
             it->region.width  += (x-(it->region.x+it->region.width));
             it->region.height -= (y-it->region.y);
-            // it->region.x=x;
             it->region.y=y;
             return true;
           }
@@ -320,14 +324,11 @@ bool Sample::AdjustBox(int x, int y){
             it->region.height += (y-(it->region.y+it->region.height));
             it->region.x=x;
             return true;
-            // it->region.y=y;
           }
           else if(mod(it->region.x+it->region.width-x)<20 && mod(it->region.y+it->region.height-y)<20){
             it->region.width  += (x-it->region.x-it->region.width);
             it->region.height += (y-it->region.y-it->region.height);
             return true;
-            // it->region.x=x;
-            // it->region.y=y;
           }
       }
       return false;
@@ -350,8 +351,6 @@ bool Sample::show(const std::string readerImplementation, const std::string wind
             depth_color = this->getSampledDepthColorMapImage(-0.9345, 1013.17);
         else
             depth_color = this->getSampledDepthColorMapImage();
-
-
         cv::imshow("Depth Color Map", depth_color);
     }
 
@@ -451,43 +450,25 @@ cv::Mat Sample::getSampledDepthColorMapImage(double alpha, double beta) const {
 }
 
 
-void Sample::CallBackFunc(int event, int x, int y, int flags, void* userdata){
-     if(event == cv::EVENT_LBUTTONUP){
-       // check(userdata);
-         // std::vector<RectRegion> regionsToPrint = ((Sample *)userdata)->rectRegions->getRegions();
-         RectRegions jumma = *(((Sample *)userdata)->rectRegions);
-         for (auto it = jumma.getRegions().begin(); it != jumma.getRegions().end(); it++) {
-             LOG(INFO) << "Class: " << it->classID << '\n';
-             LOG(INFO) << "Confidence: " << it->confidence_score << '\n';
-             LOG(INFO) << "uniqObjectID" << it->uniqObjectID <<'\n';
-             LOG(INFO) << "BBOX" << it->region.x++ << " " << it->region.y++ << " " << it->region.width << " "  << it->region.height << '\n';
-             // LOG(INFO) << " It has been executed\n";
-         }
-         // const RectRegionsPtr& regions = regionsToPrint;
-       // setRectRegions(regionss);
-
-     }
-     if  ( event == cv::EVENT_LBUTTONUP ){
-     LOG(INFO) << " This sis  : " << (((Sample *)(userdata))->rectRegions->getRegions()).size() << std::endl;
-     }
-}
-
+// Set if mouse is clicked
 void Sample::SetMousy(bool mousy){
   this->mousy = mousy;
 }
 
+// Set the current state of mouse
 bool Sample::GetMousy(){
   return this->mousy;
 }
 
-
+// This function is used to change the classes of wrongly classified detections
 void Sample::SetClassy(int x , int y, std::vector<std::string> *classNames){
-      // std::string final="";
+  // Check if the user clicked inside certain boundaries
       for (auto it = this->rectRegions->regions.begin(); it != this->rectRegions->regions.end(); it++)
           if(it->nameRect.x<x && it->nameRect.x+it->nameRect.width>x)
             if(it->nameRect.y<y && it->nameRect.y+it->nameRect.height>y){
               LOG(INFO) << "I'm inside rectName" << std::endl;
               LOG(INFO) << "ClassId : " << it->classID <<std::endl;
+              // If yes, create a GUI and pop it using which he/she could change it.
               SetClass *w = new SetClass();
               w->SetInit(&it->classID,classNames,&it->classID);
               w->show();
