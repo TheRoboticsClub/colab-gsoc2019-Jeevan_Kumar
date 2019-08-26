@@ -1,0 +1,28 @@
+#!/usr/bin/make -f
+# You must remove unused comment lines for the released package.
+export DH_VERBOSE = 1
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
+export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
+
+%:
+	dh $@
+
+
+# override_dh_auto_configure:
+	# mkdir build
+	# cd build && cmake .. && make
+	# cmake .. && make
+	# make -C build
+	# make install -C build
+
+override_dh_auto_install:
+	# $(MAKE) -C build DESTDIR=$$(pwd)/debian/cmake-hello-world/ prefix=/usr install
+	# dh_auto_install -- prefix=/usr
+	# make install -C build DESTDIR=debian/cmake-hello-world prefix=/usr
+	# make install -C build
+override_dh_usrlocal:
+
+#override_dh_auto_configure:
+#	dh_auto_configure -- \
+#	      -DCMAKE_LIBRARY_ARCHITECTURE="$(DEB_TARGET_MULTIARCH)"

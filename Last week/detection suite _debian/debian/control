@@ -1,0 +1,14 @@
+Source: deeplearningsuite
+Section: devel
+Priority: optional
+Maintainer: sleep-404 <justjeevan07@gmail.com>
+Build-Depends: cmake, debhelper (>=9)
+Standards-Version: 3.9.6
+Homepage: <insert the upstream URL, if relevant>
+
+Package: deeplearningsuite
+Architecture: any
+Multi-Arch: foreign
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: auto-generated package by debmake
+ Tool for easy testing and deployment of object detection models .

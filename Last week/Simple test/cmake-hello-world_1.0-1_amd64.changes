@@ -1,0 +1,32 @@
+Format: 1.8
+Date: Sat, 24 Aug 2019 10:44:16 +0530
+Source: cmake-hello-world
+Binary: cmake-hello-world
+Architecture: source amd64
+Version: 1.0-1
+Distribution: UNRELEASED
+Urgency: low
+Maintainer: sleep-404 <justjeevan07@gmail.com>
+Changed-By: sleep-404 <justjeevan07@gmail.com>
+Description:
+ cmake-hello-world - auto-generated package by debmake
+Changes:
+ cmake-hello-world (1.0-1) UNRELEASED; urgency=low
+ .
+   * Initial release. Closes: #nnnn
+     <nnnn is the bug number of your ITP>
+Checksums-Sha1:
+ f9d82c43ff887d66d22e027752693846dc4a8dce 900 cmake-hello-world_1.0-1.dsc
+ b5ee07718e418bc0dfcb9dfbe9543f22d1eaf975 29776 cmake-hello-world_1.0.orig.tar.gz
+ 842953d5ba9a15b4753ca4787eaccd9ef51cbc7c 2160 cmake-hello-world_1.0-1.debian.tar.xz
+ b5f0e83703cb6bfc2d79403bd9aabac4dd57b381 5194 cmake-hello-world_1.0-1_amd64.deb
+Checksums-Sha256:
+ 393cd66af0ff01d281152ecd5d8a2ae06ad854214c2939dbe8d6edf29ce79afa 900 cmake-hello-world_1.0-1.dsc
+ 4596fb6e69bea817048bb3a8883b5a0fb26c0630fd7bbbd9c04a6105faf91f67 29776 cmake-hello-world_1.0.orig.tar.gz
+ 88eb890aefc962742b1048f02e96bb385e0498a852a3c06d42b5cbe5fd6221fc 2160 cmake-hello-world_1.0-1.debian.tar.xz
+ 4423ea914c39b05ba26ac4dcc4739d37f5ead3a1112e7909c3dc5e56113c74d7 5194 cmake-hello-world_1.0-1_amd64.deb
+Files:
+ c309c5e8f12e7274fb71d74d78047d7c 900 devel optional cmake-hello-world_1.0-1.dsc
+ 7d25f86d31454452b3b7caeb3ad429d2 29776 devel optional cmake-hello-world_1.0.orig.tar.gz
+ 363fc8a509db1a607f44bec18d4a5db1 2160 devel optional cmake-hello-world_1.0-1.debian.tar.xz
+ 2533034f3b2b967143b51812fe2e4fee 5194 devel optional cmake-hello-world_1.0-1_amd64.deb

@@ -1,0 +1,312 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: deeplearningsuite
+Source: <url://example.com>
+
+Files:     CMakeLists.txt
+           DatasetEvaluationApp/CMakeLists.txt
+           DatasetEvaluationApp/SamplerGeneratorHandler/Converter.cpp
+           DatasetEvaluationApp/SamplerGeneratorHandler/Converter.h
+           DatasetEvaluationApp/SamplerGeneratorHandler/Deployer.cpp
+           DatasetEvaluationApp/SamplerGeneratorHandler/Deployer.h
+           DatasetEvaluationApp/SamplerGeneratorHandler/Detector.cpp
+           DatasetEvaluationApp/SamplerGeneratorHandler/Detector.h
+           DatasetEvaluationApp/SamplerGeneratorHandler/Evaluator.cpp
+           DatasetEvaluationApp/SamplerGeneratorHandler/Evaluator.h
+           DatasetEvaluationApp/SamplerGeneratorHandler/SamplerGenerationHandler.cpp
+           DatasetEvaluationApp/SamplerGeneratorHandler/SamplerGenerationHandler.h
+           DatasetEvaluationApp/SamplerGeneratorHandler/Viewer.cpp
+           DatasetEvaluationApp/SamplerGeneratorHandler/Viewer.h
+           DatasetEvaluationApp/gui/ListViewConfig.cpp
+           DatasetEvaluationApp/gui/ListViewConfig.h
+           DatasetEvaluationApp/gui/TabHandler.cpp
+           DatasetEvaluationApp/gui/TabHandler.h
+           DatasetEvaluationApp/gui/Utils.cpp
+           DatasetEvaluationApp/gui/Utils.h
+           DatasetEvaluationApp/main.cpp
+           DatasetEvaluationApp/mainwindow.cpp
+           DatasetEvaluationApp/mainwindow.h
+           DeepLearningSuiteLib/CMakeLists.txt
+           DeepLearningSuiteLib/Common/CMakeLists.txt
+           DeepLearningSuiteLib/Common/EvalMatrix.cpp
+           DeepLearningSuiteLib/Common/EvalMatrix.h
+           DeepLearningSuiteLib/Common/Matrix.h
+           DeepLearningSuiteLib/Common/Sample.cpp
+           DeepLearningSuiteLib/Common/Sample.h
+           DeepLearningSuiteLib/DatasetConverters/CMakeLists.txt
+           DeepLearningSuiteLib/DatasetConverters/ClassType.cpp
+           DeepLearningSuiteLib/DatasetConverters/ClassType.h
+           DeepLearningSuiteLib/DatasetConverters/ClassTypeGeneric.cpp
+           DeepLearningSuiteLib/DatasetConverters/ClassTypeGeneric.h
+           DeepLearningSuiteLib/DatasetConverters/ClassTypeMapper.cpp
+           DeepLearningSuiteLib/DatasetConverters/ClassTypeMapper.h
+           DeepLearningSuiteLib/DatasetConverters/ClassTypeOwn.cpp
+           DeepLearningSuiteLib/DatasetConverters/ClassTypeOwn.h
+           DeepLearningSuiteLib/DatasetConverters/DatasetConverter.cpp
+           DeepLearningSuiteLib/DatasetConverters/DatasetConverter.h
+           DeepLearningSuiteLib/DatasetConverters/Tree.cpp
+           DeepLearningSuiteLib/DatasetConverters/Tree.h
+           DeepLearningSuiteLib/DatasetConverters/liveReaders/CameraReader.cpp
+           DeepLearningSuiteLib/DatasetConverters/liveReaders/CameraReader.h
+           DeepLearningSuiteLib/DatasetConverters/liveReaders/GenericLiveReader.cpp
+           DeepLearningSuiteLib/DatasetConverters/liveReaders/GenericLiveReader.h
+           DeepLearningSuiteLib/DatasetConverters/liveReaders/JderobotReader.cpp
+           DeepLearningSuiteLib/DatasetConverters/liveReaders/JderobotReader.h
+           DeepLearningSuiteLib/DatasetConverters/liveReaders/RecorderReader.cpp
+           DeepLearningSuiteLib/DatasetConverters/liveReaders/RecorderReader.h
+           DeepLearningSuiteLib/DatasetConverters/liveReaders/VideoReader.cpp
+           DeepLearningSuiteLib/DatasetConverters/liveReaders/VideoReader.h
+           DeepLearningSuiteLib/DatasetConverters/readers/COCODatasetReader.cpp
+           DeepLearningSuiteLib/DatasetConverters/readers/COCODatasetReader.h
+           DeepLearningSuiteLib/DatasetConverters/readers/DatasetReader.cpp
+           DeepLearningSuiteLib/DatasetConverters/readers/DatasetReader.h
+           DeepLearningSuiteLib/DatasetConverters/readers/GenericDatasetReader.cpp
+           DeepLearningSuiteLib/DatasetConverters/readers/GenericDatasetReader.h
+           DeepLearningSuiteLib/DatasetConverters/readers/ImageNetDatasetReader.cpp
+           DeepLearningSuiteLib/DatasetConverters/readers/ImageNetDatasetReader.h
+           DeepLearningSuiteLib/DatasetConverters/readers/OwnDatasetReader.cpp
+           DeepLearningSuiteLib/DatasetConverters/readers/OwnDatasetReader.h
+           DeepLearningSuiteLib/DatasetConverters/readers/PascalVOCDatasetReader.cpp
+           DeepLearningSuiteLib/DatasetConverters/readers/PascalVOCDatasetReader.h
+           DeepLearningSuiteLib/DatasetConverters/readers/PrincetonDatasetReader.cpp
+           DeepLearningSuiteLib/DatasetConverters/readers/PrincetonDatasetReader.h
+           DeepLearningSuiteLib/DatasetConverters/readers/SamplesReader.cpp
+           DeepLearningSuiteLib/DatasetConverters/readers/SamplesReader.h
+           DeepLearningSuiteLib/DatasetConverters/readers/SpinelloDatasetReader.cpp
+           DeepLearningSuiteLib/DatasetConverters/readers/SpinelloDatasetReader.h
+           DeepLearningSuiteLib/DatasetConverters/readers/YoloDatasetReader.cpp
+           DeepLearningSuiteLib/DatasetConverters/readers/YoloDatasetReader.h
+           DeepLearningSuiteLib/DatasetConverters/writers/COCODatasetWriter.cpp
+           DeepLearningSuiteLib/DatasetConverters/writers/COCODatasetWriter.h
+           DeepLearningSuiteLib/DatasetConverters/writers/DatasetWriter.cpp
+           DeepLearningSuiteLib/DatasetConverters/writers/DatasetWriter.h
+           DeepLearningSuiteLib/DatasetConverters/writers/GenericDatasetWriter.cpp
+           DeepLearningSuiteLib/DatasetConverters/writers/GenericDatasetWriter.h
+           DeepLearningSuiteLib/DatasetConverters/writers/OwnDatasetWriter.cpp
+           DeepLearningSuiteLib/DatasetConverters/writers/OwnDatasetWriter.h
+           DeepLearningSuiteLib/DatasetConverters/writers/PascalVOCDatasetWriter.cpp
+           DeepLearningSuiteLib/DatasetConverters/writers/PascalVOCDatasetWriter.h
+           DeepLearningSuiteLib/DatasetConverters/writers/YoloDatasetWriter.cpp
+           DeepLearningSuiteLib/DatasetConverters/writers/YoloDatasetWriter.h
+           DeepLearningSuiteLib/Detectors/CMakeLists.txt
+           DeepLearningSuiteLib/Detectors/Detector.h
+           DeepLearningSuiteLib/FrameworkEvaluator/CMakeLists.txt
+           DeepLearningSuiteLib/FrameworkEvaluator/CaffeInferencer.cpp
+           DeepLearningSuiteLib/FrameworkEvaluator/CaffeInferencer.h
+           DeepLearningSuiteLib/FrameworkEvaluator/ClassStatistics.cpp
+           DeepLearningSuiteLib/FrameworkEvaluator/ClassStatistics.h
+           DeepLearningSuiteLib/FrameworkEvaluator/DarknetInferencer.cpp
+           DeepLearningSuiteLib/FrameworkEvaluator/DarknetInferencer.h
+           DeepLearningSuiteLib/FrameworkEvaluator/DetectionsEvaluator.cpp
+           DeepLearningSuiteLib/FrameworkEvaluator/DetectionsEvaluator.h
+           DeepLearningSuiteLib/FrameworkEvaluator/FrameworkInferencer.cpp
+           DeepLearningSuiteLib/FrameworkEvaluator/FrameworkInferencer.h
+           DeepLearningSuiteLib/FrameworkEvaluator/GenericInferencer.cpp
+           DeepLearningSuiteLib/FrameworkEvaluator/GenericInferencer.h
+           DeepLearningSuiteLib/FrameworkEvaluator/GlobalStats.cpp
+           DeepLearningSuiteLib/FrameworkEvaluator/GlobalStats.h
+           DeepLearningSuiteLib/FrameworkEvaluator/KerasInferencer.cpp
+           DeepLearningSuiteLib/FrameworkEvaluator/KerasInferencer.h
+           DeepLearningSuiteLib/FrameworkEvaluator/MassBatchInferencer.cpp
+           DeepLearningSuiteLib/FrameworkEvaluator/MassBatchInferencer.h
+           DeepLearningSuiteLib/FrameworkEvaluator/MassInferencer.cpp
+           DeepLearningSuiteLib/FrameworkEvaluator/MassInferencer.h
+           DeepLearningSuiteLib/FrameworkEvaluator/StatsWriter.cpp
+           DeepLearningSuiteLib/FrameworkEvaluator/StatsWriter.h
+           DeepLearningSuiteLib/FrameworkEvaluator/TensorFlowInferencer.cpp
+           DeepLearningSuiteLib/FrameworkEvaluator/TensorFlowInferencer.h
+           DeepLearningSuiteLib/GenerationUtils/BoundingRectGuiMover.cpp
+           DeepLearningSuiteLib/GenerationUtils/BoundingRectGuiMover.h
+           DeepLearningSuiteLib/GenerationUtils/BoundingValidator.cpp
+           DeepLearningSuiteLib/GenerationUtils/BoundingValidator.h
+           DeepLearningSuiteLib/GenerationUtils/CMakeLists.txt
+           DeepLearningSuiteLib/GenerationUtils/DepthForegroundSegmentator.cpp
+           DeepLearningSuiteLib/GenerationUtils/DepthForegroundSegmentator.h
+           DeepLearningSuiteLib/GenerationUtils/DetectionsValidator.cpp
+           DeepLearningSuiteLib/GenerationUtils/DetectionsValidator.h
+           DeepLearningSuiteLib/Regions/CMakeLists.txt
+           DeepLearningSuiteLib/Regions/ContourRegion.cpp
+           DeepLearningSuiteLib/Regions/ContourRegion.h
+           DeepLearningSuiteLib/Regions/ContourRegions.cpp
+           DeepLearningSuiteLib/Regions/ContourRegions.h
+           DeepLearningSuiteLib/Regions/RectRegion.cpp
+           DeepLearningSuiteLib/Regions/RectRegion.h
+           DeepLearningSuiteLib/Regions/RectRegions.cpp
+           DeepLearningSuiteLib/Regions/RectRegions.h
+           DeepLearningSuiteLib/Regions/Region.h
+           DeepLearningSuiteLib/Regions/Regions.h
+           DeepLearningSuiteLib/Regions/RleRegion.cpp
+           DeepLearningSuiteLib/Regions/RleRegion.h
+           DeepLearningSuiteLib/Regions/RleRegions.cpp
+           DeepLearningSuiteLib/Regions/RleRegions.h
+           DeepLearningSuiteLib/Regions/maskApi.cpp
+           DeepLearningSuiteLib/Regions/maskApi.h
+           DeepLearningSuiteLib/Utils/CMakeLists.txt
+           DeepLearningSuiteLib/Utils/Configuration.cpp
+           DeepLearningSuiteLib/Utils/Configuration.h
+           DeepLearningSuiteLib/Utils/DepthUtils.cpp
+           DeepLearningSuiteLib/Utils/DepthUtils.h
+           DeepLearningSuiteLib/Utils/JsonHelper.h
+           DeepLearningSuiteLib/Utils/Key.cpp
+           DeepLearningSuiteLib/Utils/Key.h
+           DeepLearningSuiteLib/Utils/Normalizations.cpp
+           DeepLearningSuiteLib/Utils/Normalizations.h
+           DeepLearningSuiteLib/Utils/PathHelper.cpp
+           DeepLearningSuiteLib/Utils/PathHelper.h
+           DeepLearningSuiteLib/Utils/SampleGenerationApp.cpp
+           DeepLearningSuiteLib/Utils/SampleGenerationApp.h
+           DeepLearningSuiteLib/Utils/StatsUtils.cpp
+           DeepLearningSuiteLib/Utils/StatsUtils.h
+           DeepLearningSuiteLib/Utils/StringHandler.h
+           DeepLearningSuiteLib/python_modules/keras_detect.py
+           DeepLearningSuiteLib/python_modules/keras_utils/__init__.py
+           DeepLearningSuiteLib/python_modules/tensorflow_detect.py
+           Deps/glog/CMakeLists.txt
+           Deps/ice/CMakeLists.txt
+           Deps/numpy/CMake/FindNumPy.cmake
+           Deps/numpy/CMakeLists.txt
+           Deps/opencv/CMakeLists.txt
+           Deps/qt/CMakeLists.txt
+           Deps/ros/CMakeLists.txt
+           Deps/yaml-cpp/CMakeLists.txt
+           Dockerfile/Dockerfile
+           Dockerfile/keyboard
+           SampleGenerationApp/CMakeLists.txt
+           SampleGenerationApp/generator.cpp
+           Tools/AutoEvaluator/CMakeLists.txt
+           Tools/AutoEvaluator/autoEvaluator.cpp
+           Tools/CMakeLists.txt
+           Tools/Converter/CMakeLists.txt
+           Tools/Converter/converter.cpp
+           Tools/Detector/CMakeLists.txt
+           Tools/Detector/detector.cpp
+           Tools/Evaluator/CMakeLists.txt
+           Tools/Evaluator/evaluator.cpp
+           Tools/Splitter/CMakeLists.txt
+           Tools/Splitter/splitter.cpp
+           Tools/Viewer/CMakeLists.txt
+           Tools/Viewer/viewer.cpp
+           libs/CMakeLists.txt
+           libs/comm/CMakeLists.txt
+           libs/comm/src/ros/listenerCamera.cpp
+           libs/comm/src/ros/translators.cpp
+           libs/config/CMakeLists.txt
+           libs/depthLib/CMakeLists.txt
+           libs/depthLib/DepthFilter.cpp
+           libs/depthLib/DepthFilter.h
+           libs/depthLib/DepthSampler.cpp
+           libs/depthLib/DepthSampler.h
+           libs/interfaces/CMakeLists.txt
+           libs/interfaces/slice/CMakeLists.txt
+           libs/interfaces/slice/jderobot/CMakeLists.txt
+           libs/interfaces/slice/jderobot/common.ice
+           libs/interfaces/slice/jderobot/containers.ice
+           libs/interfaces/slice/jderobot/datetime.ice
+           libs/interfaces/slice/jderobot/exceptions.ice
+           libs/types/CMakeLists.txt
+           libs/utils/CMakeLists.txt
+           libs/utils/CameraUtils.cpp
+           libs/utils/CameraUtils.h
+           libs/utils/colorspaces/imagecv.cpp
+           package.sh
+           test/CMakeLists.txt
+           test/GLOG/CMakeLists.txt
+           test/GLOG/glogTest.cpp
+Copyright: __NO_COPYRIGHT_NOR_LICENSE__
+License:   __UNKNOWN__
+
+Files:     libs/comm/include/comm/cameraClient.hpp
+           libs/comm/include/comm/communicator.hpp
+           libs/comm/include/comm/ice/cameraIceClient.hpp
+           libs/comm/include/comm/interfaces/cameraClient.hpp
+           libs/comm/include/comm/ros/listenerCamera.hpp
+           libs/comm/include/comm/ros/translators.hpp
+           libs/comm/include/comm/tools.hpp
+           libs/comm/src/cameraClient.cpp
+           libs/comm/src/communicator.cpp
+           libs/comm/src/ice/cameraIceClient.cpp
+           libs/comm/src/tools.cpp
+           libs/config/include/config/config.h
+           libs/config/include/config/loader.hpp
+           libs/config/include/config/properties.hpp
+           libs/config/include/config/stdutils.hpp
+           libs/config/src/loader.cpp
+           libs/config/src/properties.cpp
+           libs/interfaces/slice/jderobot/camera.ice
+           libs/interfaces/slice/jderobot/image.ice
+           libs/types/include/jderobottypes/image.h
+           libs/types/include/jderobottypes/rgbd.h
+           libs/utils/colorspaces/colorspaces.h
+           libs/utils/colorspaces/colorspacesmm.h
+           libs/utils/colorspaces/imagecv.h
+           libs/utils/colorspaces/rgb2hsv.c
+           libs/utils/colorspaces/rgb2yuv.c
+           libs/utils/colorspaces/uncopyable.h
+Copyright: 1997-2009 JDERobot Developers Team
+           1997-2016 JDE Developers TeamkinectViewer.camRGB
+           1997-2017 JDE JdeRobot Developers Team
+           1997-2018 JDE Developers Team
+License:   GPL-3.0+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see http://www.gnu.org/licenses/.
+ .
+ On Debian systems, the complete text of the GNU General Public License
+ Version 3 can be found in `/usr/share/common-licenses/GPL-3'.
+
+Files:     Deps/ice/CMake/FindZeroCIce.cmake
+           Deps/ice/CMake/FindZeroCIceBox.cmake
+           Deps/ice/CMake/FindZeroCIceCore.cmake
+           Deps/ice/CMake/FindZeroCIceExecutables.cmake
+           Deps/ice/CMake/FindZeroCIceGrid.cmake
+           Deps/ice/CMake/FindZeroCIcePatch2.cmake
+           Deps/ice/CMake/FindZeroCIceSSL.cmake
+           Deps/ice/CMake/FindZeroCIceStorm.cmake
+           Deps/ice/CMake/FindZeroCIceUtil.cmake
+           Deps/ice/CMake/FindZeroCIceXML.cmake
+           Deps/ice/CMake/FindZeroIceCore.cmake
+Copyright: 2007 Pau Garcia i Quiles, <pgquiles@elpauer.org>
+License:   __UNKNOWN__
+ Redistribution and use is allowed according to the terms of the BSD license.
+ For details see the accompanying COPYING-CMAKE-SCRIPTS file.
+
+Files:     DeepLearningSuiteLib/python_modules/keras_utils/bounding_box_utils.py
+           DeepLearningSuiteLib/python_modules/keras_utils/keras_layer_AnchorBoxes.py
+           DeepLearningSuiteLib/python_modules/keras_utils/keras_layer_DecodeDetections.py
+           DeepLearningSuiteLib/python_modules/keras_utils/keras_layer_L2Normalization.py
+           DeepLearningSuiteLib/python_modules/keras_utils/keras_ssd_loss.py
+Copyright: 2017-2018 Pierluigi Ferrari
+License:   GPL-3.0+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ .
+ On Debian systems, the complete text of the GNU General Public License
+ Version 3 can be found in `/usr/share/common-licenses/GPL-3'.
+
+#----------------------------------------------------------------------------
+# xml and html files (skipped):
+#         ClassMappingHierarchy.xml
+#         DatasetEvaluationApp/mainwindow.ui
+#         libs/comm/package.xml
+
+#----------------------------------------------------------------------------
+# Files marked as NO_LICENSE_TEXT_FOUND may be covered by the following
+# license/copyright files.
